@@ -1,0 +1,5 @@
+- add profit to 'Travel' table in database
+- App should calculate profit and costs and taxes
+- App should have compolistes of (Hostel)type and (Transport)type and (place)type in addition to text 'Other' option 
+- database should have Is A relationship for (Contactor, Partner) tables to discribe [Transport Owners, Hostel Owners, Partners]
+-
