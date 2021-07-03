@@ -1,14 +1,36 @@
+
+CREATE DATABASE [DTS]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( name = 'DTS_data',
+filename = 'D:\- Database Management Systems\DomesticTourismSystem\DataBase\DTS_data.mdf',
+SIZE = 8MB,
+FILEGROWTH = 5MB)
+ LOG ON 
+( NAME = 'DTS_log',
+filename = 'D:\- Database Management Systems\DomesticTourismSystem\DataBase\DTS_log.ldf',
+SIZE = 5MB,
+FILEGROWTH = 5MB)
+ collate Arabic_CI_AI
+
+GO
 use [DTS]
 
-create table Contractor
+create table Contractor --Partners, Hostel owners and transport owners
 (
 code int identity(1,1) primary key,
-[name] varchar(75) not null,
-ID char(20),
-flat varchar(20),
+[name] varchar(75) not null, --Name of person or company 
+ID char(20) not null, --National ID for persons or Commercial Register number for companies
+email nvarchar(100),
+flat varchar(10),
+building varchar(20),
 street varchar(20),
 [zone] varchar(20),
-city varchar(50) default '«·√”ﬂ‰œ—Ì…'
+city varchar(50) default '«·√”ﬂ‰œ—Ì…',
+[type] varchar(30) default '‘—ﬂ…',
+contractDate date not null,
+contractTermination date null,
+[state] bit default 1
 );
 
 Go
@@ -98,13 +120,8 @@ Go
 
 create table [Partner]
 (
-code int identity(1,1) primary key,
-name varchar(75) not null,
-[state] bit not null default 1,
-[type] varchar(50) default '„ƒ””…',
-creatDate smalldatetime not null,
+code int primary key foreign key references Contractor(code),
 discount float not null default 0.2 check(discount between 0 and 1),
-mobile char(11)
 );
 
 Go
