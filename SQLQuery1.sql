@@ -150,14 +150,6 @@ fax bit default 0 not null,
 constraint PK_Phone primary key(contractorCode,phone)
 );
 
-Go
-
-create table PartnerTourist
-(
-partnerCode int foreign key references [Partner](code) on delete cascade,
-NID char(14) foreign key references Tourist(NID) on delete cascade,
-constraint PK_PartnerTourist primary Key(partnerCode,NID)
-);
 
 Go
 
