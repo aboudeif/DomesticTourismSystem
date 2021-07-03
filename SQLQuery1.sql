@@ -3,12 +3,12 @@ CREATE DATABASE [DTS]
  CONTAINMENT = NONE
  ON  PRIMARY 
 ( name = 'DTS_data',
-filename = 'D:\- Database Management Systems\DomesticTourismSystem\DataBase\DTS_data.mdf',
+filename = 'D:\DataBase\DTS_data.mdf',
 SIZE = 8MB,
 FILEGROWTH = 5MB)
  LOG ON 
 ( NAME = 'DTS_log',
-filename = 'D:\- Database Management Systems\DomesticTourismSystem\DataBase\DTS_log.ldf',
+filename = 'D:\DataBase\DTS_log.ldf',
 SIZE = 5MB,
 FILEGROWTH = 5MB)
  collate Arabic_CI_AI
@@ -40,7 +40,7 @@ create table Transport
 (
 code int identity (1,1) primary key,
 [type] varchar(30) default '√Ê Ê»Ì”',
-ownercode int null foreign key references Contractor(code),
+ownercode int null foreign key references Contractor(code) on delete set null,
 number varchar(25) null,
 model nvarchar(30) null,
 capacity smallint default 1 check(capacity > 0),
@@ -57,7 +57,7 @@ create table Hostel
 code int identity(1,1) primary key,
 [type] varchar(30) default '›‰œﬁ',
 [name] nvarchar(75) not null,
-ownerCode int null foreign key references Contractor(code) ,
+ownerCode int null foreign key references Contractor(code) on delete set null,
 creatDate smalldatetime not null,
 [state] bit default 1,
 city varchar(50) default '«·√”ﬂ‰œ—Ì…',
@@ -120,7 +120,7 @@ Go
 
 create table [Partner]
 (
-code int primary key foreign key references Contractor(code),
+code int primary key foreign key references Contractor(code) on delete cascade,
 discount float not null default 0.2 check(discount between 0 and 1),
 );
 
@@ -133,7 +133,7 @@ gender bit not null default 1,
 birthDate date not null,
 mobile char(11) not null,
 email varchar(50),
-partnerCode int foreign key references [Partner](code) null,
+partnerCode int null foreign key references [Partner](code) on delete set null,
 info nvarchar(max),
 score smallint not null default 0,
 balance money not null default 0,
@@ -144,7 +144,7 @@ city varchar(50) default '«·√”ﬂ‰œ—Ì…',
 
 create table Phone
 (
-contractorCode int foreign key references Contractor(code),
+contractorCode int foreign key references Contractor(code) on delete cascade,
 phone char(11) unique not null,
 fax bit default 0 not null,
 constraint PK_Phone primary key(contractorCode,phone)
@@ -154,8 +154,8 @@ Go
 
 create table PartnerTourist
 (
-partnerCode int foreign key references [Partner](code),
-NID char(14) foreign key references Tourist(NID),
+partnerCode int foreign key references [Partner](code) on delete cascade,
+NID char(14) foreign key references Tourist(NID) on delete cascade,
 constraint PK_PartnerTourist primary Key(partnerCode,NID)
 );
 
@@ -163,8 +163,8 @@ Go
 
 create table RegTransport
 (
-travelCode int foreign key references Travel(code),
-transportCode int foreign key references Transport(code),
+travelCode int foreign key references Travel(code) on delete cascade,
+transportCode int foreign key references Transport(code) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegTrandport primary key(travelCode,transportCode)
 );
@@ -173,8 +173,8 @@ Go
 
 create table RegHostel
 (
-travelCode int foreign key references Travel(code),
-hostelCode int foreign key references Hostel(code),
+travelCode int foreign key references Travel(code) on delete cascade,
+hostelCode int foreign key references Hostel(code) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegHostel primary key(travelCode,hostelCode)
 );
@@ -183,8 +183,8 @@ Go
 
 create table RegPlace
 (
-travelCode int foreign key references Travel(code),
-placeCode int foreign key references Place(code),
+travelCode int foreign key references Travel(code) on delete cascade,
+placeCode int foreign key references Place(code) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegPlace primary key(travelCode,placeCode)
 );
@@ -193,8 +193,8 @@ Go
 
 create table RegGuide
 (
-travelCode int foreign key references Travel(code),
-guideCode char(14) foreign key references Guide(NID),
+travelCode int foreign key references Travel(code) on delete cascade,
+guideCode char(14) foreign key references Guide(NID) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegGuide primary key(travelCode,guideCode)
 );
@@ -203,8 +203,8 @@ Go
 
 create table RegTourist
 (
-travelCode int foreign key references Travel(code),
-touristCode char(14) foreign key references Tourist(NID),
+travelCode int foreign key references Travel(code) on delete cascade,
+touristCode char(14) foreign key references Tourist(NID) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegTourist primary key(travelCode,touristCode)
 );
@@ -213,8 +213,8 @@ Go
 
 create table RegBrochure
 (
-travelCode int foreign key references Travel(code),
-brochureCode int foreign key references Brochure(code),
+travelCode int foreign key references Travel(code) on delete cascade,
+brochureCode int foreign key references Brochure(code) on delete cascade,
 regDate smalldatetime not null,
 constraint PK_RegBrochure primary key(travelCode,brochureCode)
 );
