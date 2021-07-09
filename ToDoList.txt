@@ -2,4 +2,6 @@
 - App should calculate profit and costs and taxes
 - App should have compolistes of (Hostel)type and (Transport)type and (place)type in addition to text 'Other' option 
 - database should have Is A relationship for (Contactor, Partner) tables to discribe [Transport Owners, Hostel Owners, Partners]
--
+- Transport should not registerd in more than one travel at the same day
+- App should show capacity of transports and hostel compared to tourists number for every travel
+- 
