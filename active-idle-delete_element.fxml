@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="309.0" prefWidth="799.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <SplitPane dividerPositions="0.13355048859934854, 0.8436482084690554" orientation="VERTICAL" prefHeight="368.0" prefWidth="640.0">
+         <items>
+            <AnchorPane minHeight="37.0" minWidth="300.0" prefHeight="37.0">
+               <children>
+                  <Group layoutX="680.0" layoutY="3.0" AnchorPane.rightAnchor="19.0">
+                     <children>
+                        <TextField layoutX="294.0" />
+                        <ComboBox prefHeight="31.0" prefWidth="288.0" />
+                        <Button layoutX="487.0" mnemonicParsing="false" text="بحث" />
+                     </children>
+                  </Group>
+                  <Label layoutX="19.0" layoutY="8.0" text="تعديل بيانات رحلة" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="19.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="797.0">
+               <children>
+                  <TableView layoutX="392.0" layoutY="-10.0" minHeight="44.0" minWidth="300.0" prefHeight="260.0" prefWidth="797.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <columns>
+                        <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                        <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                        <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                        <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                        <TableColumn prefWidth="579.0" text="التكلفة" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="5.0" maxHeight="44.0" minHeight="44.0" prefHeight="44.0">
+               <children>
+                  <SplitPane dividerPositions="0.5" layoutX="19.0" layoutY="7.0">
+                     <items>
+                        <Button layoutX="281.0" layoutY="3.0" mnemonicParsing="false" text="تعديل" />
+                        <Button layoutX="19.0" layoutY="3.0" mnemonicParsing="false" text="رجوع" />
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </children>
+</VBox>

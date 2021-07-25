@@ -1,0 +1,914 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox minHeight="940.0" minWidth="300.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="940.0" prefWidth="1239.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar prefWidth="1097.0" VBox.vgrow="NEVER">
+      <menus>
+            <Menu mnemonicParsing="false" text="مستخدم">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="بيانات المستخدم" />
+                  <MenuItem mnemonicParsing="false" text="أنشطة المستخدم" />
+                  <MenuItem mnemonicParsing="false" text="إغلاق الجلسة" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="خروج" />
+               </items>
+            </Menu>
+        <Menu mnemonicParsing="false" text="الرحلات">
+          <items>
+                  <MenuItem mnemonicParsing="false" text="جدول الرحلات" />
+            <MenuItem mnemonicParsing="false" text="عرض الرحلات" />
+                  <Menu mnemonicParsing="false" text="التسجيل في رحلة">
+                    <items>
+                      <MenuItem mnemonicParsing="false" text="تسجيل السياح" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل المزارات السياحية" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل وسائل النقل" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل أماكن الإقامة" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل المرشدين" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل الإعلانات" />
+                        <MenuItem mnemonicParsing="false" text="تسجيل المطبوعات" />
+                    </items>
+                  </Menu>
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="رحلة جديدة" />
+            <MenuItem mnemonicParsing="false" text="تعديل بيانات رحلة" />
+            <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل رحلة" />
+            <MenuItem mnemonicParsing="false" text="حذف رحلة" />
+          </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="السياح">
+          <items>
+            <MenuItem mnemonicParsing="false" text="عرض السياح" />
+            <SeparatorMenuItem mnemonicParsing="false" />
+            <MenuItem mnemonicParsing="false" text="سائح جديد" />
+            <MenuItem mnemonicParsing="false" text="تعديل بيانات سائح" />
+            <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل سائح" />
+            <MenuItem mnemonicParsing="false" text="حذف سائح" />
+          </items>
+        </Menu>
+            <Menu mnemonicParsing="false" text="المزارات السياحية">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض المزارات السياحية" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="مزار سياحي جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات مزار سياحي" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل مزار سياحي" />
+                  <MenuItem mnemonicParsing="false" text="حذف مزار سياحي" />
+               </items>
+            </Menu>
+        <Menu mnemonicParsing="false" text="وسائل النقل">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض وسائل النقل" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="وسيلة نقل جديدة" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات وسيلة نقل" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل وسيلة نقل" />
+                  <MenuItem mnemonicParsing="false" text="حذف وسيلة نقل" />
+               </items>
+        </Menu>
+            <Menu mnemonicParsing="false" text="أماكن الإقامة">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض أماكن الإقامة" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="مكان إقامة جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات مكان إقامة" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل مكان إقامة" />
+                  <MenuItem mnemonicParsing="false" text="حذف مكان إقامة" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="المتعاقدين">
+               <items>
+                  <Menu mnemonicParsing="false" text="عرض المتعاقدين">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="عرض الشركاء" />
+                        <MenuItem mnemonicParsing="false" text="عرض متعاقدي النقل" />
+                        <MenuItem mnemonicParsing="false" text="عرض متعاقدي الإقامة" />
+                        <MenuItem mnemonicParsing="false" text="عرض متعاقدي الدعاية" />
+                    </items>
+                  </Menu>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="متعاقد جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات متعاقد" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل متعاقد" />
+                  <MenuItem mnemonicParsing="false" text="حذف متعاقد" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="المرشدين">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض المرشدين" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="مرشد جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات مرشد" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل مرشد" />
+                  <MenuItem mnemonicParsing="false" text="حذف مرشد" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الإعلانات">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="جدول الإعلانات" />
+                  <MenuItem mnemonicParsing="false" text="عرض الإعلانات" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="إعلان جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات إعلان" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل إعلان" />
+                  <MenuItem mnemonicParsing="false" text="حذف إعلان" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="المطبوعات">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض المطبوعات" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="دعاية مطبوعة جديدة" />
+                  <MenuItem mnemonicParsing="false" text="تعديل بيانات دعاية مطبوعة " />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل دعاية مطبوعة " />
+                  <MenuItem mnemonicParsing="false" text="حذف دعاية مطبوعة " />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="التقارير">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض خطط التشغيل" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير السياح" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير الرحلات" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير وسائل النقل" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير أماكن الإقامة" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير الشركاء" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير متعاقدي النقل" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير متعاقدي الإقامة" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير المرشدين" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير الإعلانات" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير المطبوعات" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير الموظقين" />
+                  <MenuItem mnemonicParsing="false" text="عرض تقرير المزارات السياحية" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="عرض التقرير المالي" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الموظفين">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="عرض الموظفين" />
+                  <MenuItem mnemonicParsing="false" text="عرض الأنشطة" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" text="موظف جديد" />
+                  <MenuItem mnemonicParsing="false" text="تعديل موظف" />
+                  <MenuItem mnemonicParsing="false" text="تنشيط/تعطيل موظف" />
+                  <MenuItem mnemonicParsing="false" text="حذف موظف" />
+               </items>
+            </Menu>
+      </menus>
+    </MenuBar>
+      <VBox layoutX="10.0" layoutY="952.0" minHeight="910.0" minWidth="300.0">
+         <children>
+            <AnchorPane fx:id="show11" maxHeight="-1.0" maxWidth="-1.0" minHeight="730.0" minWidth="1066.0" prefHeight="730.0" prefWidth="1066.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <SplitPane dividerPositions="0.4129955947136564" layoutX="-1.0" layoutY="2.0" orientation="VERTICAL" prefHeight="910.0" prefWidth="1239.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
+                     <items>
+                        <ScrollPane prefHeight="566.0" prefWidth="1237.0">
+                           <content>
+                              <AnchorPane minHeight="44.0" minWidth="300.0" prefHeight="857.0" prefWidth="1237.0">
+                                 <children>
+                                    <GridPane layoutX="37.0" layoutY="84.0" prefHeight="731.0" prefWidth="1147.0">
+                                      <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="580.0" minWidth="10.0" prefWidth="218.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="957.0" minWidth="10.0" prefWidth="952.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="عدد الأيام المستغرقة " textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="7">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="التكلفة" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="5">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="الحالة" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="4">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="تاريخ البداية" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="8">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="تاريخ الإنتهاء" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="9">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="عنوان الرحلة" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="1">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="رقم الرحلة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label alignment="CENTER" style="-fx-background-color: #e0e0e0e0;" text="تاريخ الإنشاء" textAlignment="CENTER" textFill="#8a8888" wrapText="false" GridPane.rowIndex="6">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField GridPane.columnIndex="1" />
+                                          <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <Label alignment="CENTER" layoutX="541.0" layoutY="22.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text="بيانات الرحلة" textAlignment="CENTER" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <AnchorPane maxHeight="44.0" minHeight="44.0" prefHeight="44.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5, 0.5" layoutX="19.0" layoutY="7.0" AnchorPane.bottomAnchor="7.0">
+                                 <items>
+                                    <Button layoutX="96.0" layoutY="3.0" mnemonicParsing="false" text="تسجيل جديد" />
+                                    <ToggleButton layoutX="170.0" layoutY="3.0" mnemonicParsing="false" text="حذف تسجيل" />
+                                    <Button layoutX="19.0" layoutY="3.0" mnemonicParsing="false" text="رجوع" />
+                                 </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <VBox layoutX="10.0" layoutY="42.0" minHeight="910.0" minWidth="300.0">
+         <children>
+          <AnchorPane fx:id="show" maxHeight="-1.0" maxWidth="-1.0" minHeight="730.0" minWidth="1066.0" prefHeight="730.0" prefWidth="1066.0" VBox.vgrow="ALWAYS">
+            <children>
+                  <SplitPane dividerPositions="0.3314977973568282, 0.381057268722467, 0.947136563876652" orientation="VERTICAL" prefHeight="368.0" prefWidth="640.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <items>
+                        <AnchorPane layoutX="10.0" layoutY="10.0">
+                           <children>
+                          <Label alignment="CENTER" layoutX="65.0" layoutY="68.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد الرحلات" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                            <font>
+                              <Font size="18.0" />
+                            </font>
+                          </Label>
+                              <Label alignment="CENTER" layoutX="351.0" layoutY="68.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="65.0" layoutY="228.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد السياح المشتركين" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="351.0" layoutY="228.0" style="-fx-border-color: #e0e0e0e0;" text="617" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="763.0" layoutY="108.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="469.0" layoutY="108.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد وسائل النقل المشاركة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="469.0" layoutY="228.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد أماكن الإقامة المحجوزة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="763.0" layoutY="228.0" style="-fx-border-color: #e0e0e0e0;" text="818" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="763.0" layoutY="68.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="469.0" layoutY="68.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد المرشدين السياحين" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="469.0" layoutY="188.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي مرات زيارة الأماكن السياحية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="763.0" layoutY="188.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="351.0" layoutY="108.0" style="-fx-border-color: #e0e0e0e0;" text="51" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="65.0" layoutY="108.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الرحلات المنتهية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="469.0" layoutY="148.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد الإعلانات الممولة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="763.0" layoutY="148.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="1159.0" layoutY="188.0" style="-fx-border-color: #e0e0e0e0;" text="617" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="873.0" layoutY="188.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد المطبوعات الموزعة " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="1159.0" layoutY="228.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="873.0" layoutY="228.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي عدد الأيام المستغرقة " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="65.0" layoutY="148.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الرحلات النشطة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="351.0" layoutY="148.0" style="-fx-border-color: #e0e0e0e0;" text="5" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="351.0" layoutY="188.0" style="-fx-border-color: #e0e0e0e0;" text="17" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="65.0" layoutY="188.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الرحلات الملغاة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="883.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text="23 يوليو 2021" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="208.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="1065.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text="23 يوليو 2021" textAlignment="CENTER" textFill="WHITE" AnchorPane.rightAnchor="26.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="1033.0" layoutY="-3.0" prefHeight="12.0" prefWidth="30.0" style="&#10;" text=":" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false" AnchorPane.rightAnchor="174.0">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="516.0" layoutY="17.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text="عرض الرحلات " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="516.0" AnchorPane.rightAnchor="575.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="37.0" minWidth="300.0" prefHeight="37.0">
+                           <children>
+                              <Group layoutX="680.0" layoutY="3.0" AnchorPane.rightAnchor="19.0">
+                                 <children>
+                                    <TextField layoutX="294.0" />
+                                    <ComboBox prefHeight="31.0" prefWidth="288.0" />
+                                    <Button layoutX="487.0" mnemonicParsing="false" text="بحث" />
+                                 </children>
+                              </Group>
+                              <Label layoutX="19.0" layoutY="8.0" text="الرحلات المسجلة" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="19.0" />
+                           </children>
+                        </AnchorPane>
+                      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="96.0" prefWidth="797.0">
+                           <children>
+                              <TableView layoutX="392.0" layoutY="-10.0" minHeight="44.0" minWidth="300.0" prefHeight="260.0" prefWidth="797.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                    <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                  <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                  <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                    <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                    <TableColumn prefWidth="579.0" text="التكلفة" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane maxHeight="44.0" minHeight="44.0" prefHeight="44.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5, 0.5, 0.5, 0.5" layoutX="19.0" layoutY="7.0">
+                                 <items>
+                                    <Button layoutX="96.0" layoutY="3.0" mnemonicParsing="false" text="حذف" />
+                                    <ToggleButton layoutX="170.0" layoutY="3.0" mnemonicParsing="false" text="إيقاف" />
+                                    <Button layoutX="281.0" layoutY="3.0" mnemonicParsing="false" text="تعديل" />
+                                    <Button layoutX="361.0" layoutY="3.0" mnemonicParsing="false" text="جديد" />
+                                    <Button layoutX="19.0" layoutY="3.0" mnemonicParsing="false" text="رجوع" />
+                                 </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                    </items>
+                  </SplitPane>
+            </children>
+          </AnchorPane>
+         </children>
+      </VBox>
+      <VBox layoutX="10.0" layoutY="42.0" minHeight="910.0" minWidth="300.0">
+         <children>
+            <AnchorPane fx:id="show1" maxHeight="-1.0" maxWidth="-1.0" minHeight="730.0" minWidth="1066.0" prefHeight="730.0" prefWidth="1066.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <SplitPane dividerPositions="0.4129955947136564, 0.947136563876652" layoutX="-1.0" layoutY="2.0" orientation="VERTICAL" prefHeight="910.0" prefWidth="1239.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="2.0">
+                     <items>
+                        <ScrollPane prefHeight="566.0" prefWidth="1237.0">
+                           <content>
+                              <AnchorPane minHeight="44.0" minWidth="300.0">
+                                 <children>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="377.0" style="-fx-background-color: #e0e0e0e0;" text="عدد السياح المشتركين" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="351.0" layoutY="377.0" style="-fx-border-color: #e0e0e0e0;" text="617" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="257.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="257.0" style="-fx-background-color: #e0e0e0e0;" text="عدد وسائل النقل المشاركة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="377.0" style="-fx-background-color: #e0e0e0e0;" text="عدد أماكن الإقامة المحجوزة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="377.0" style="-fx-border-color: #e0e0e0e0;" text="818" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="175.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="872.0" layoutY="175.0" style="-fx-background-color: #e0e0e0e0;" text="عدد المرشدين السياحين" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="337.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الأماكن السياحية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="337.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="297.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الإعلانات الممولة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="297.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="214.0" style="-fx-border-color: #e0e0e0e0;" text="617" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="873.0" layoutY="214.0" style="-fx-background-color: #e0e0e0e0;" text="عدد المطبوعات " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="254.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="873.0" layoutY="254.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الأيام المستغرقة " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="516.0" layoutY="17.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text="بيانات الرحلة" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="516.0" AnchorPane.rightAnchor="575.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="87.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="87.0" style="-fx-background-color: #e0e0e0e0;" text="رقم الرحلة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="361.0" layoutY="127.0" style="-fx-border-color: #e0e0e0e0;" text="رحلة حقيقية ذهبية استثنائية حيث جمال الطبيعة الخلابة والصخور العملاقة في مدينة الصحراء الضخمة لمدة ثلاثة أيام شاملة الأفطار والغداء والمياه والشاي والعناب" textFill="#8a8888" wrapText="true" AnchorPane.leftAnchor="361.0" AnchorPane.rightAnchor="58.0">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="127.0" style="-fx-background-color: #e0e0e0e0;" text="عنوان الرحلة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="470.0" layoutY="214.0" style="-fx-background-color: #e0e0e0e0;" text="تاريخ الإنتهاء" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="214.0" style="-fx-border-color: #e0e0e0e0;" text="17/10/1975" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="175.0" style="-fx-border-color: #e0e0e0e0;" text="12/10/1975" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="175.0" style="-fx-background-color: #e0e0e0e0;" text="تاريخ البداية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="175.0" style="-fx-background-color: #e0e0e0e0;" text="الحالة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="175.0" style="-fx-border-color: #e0e0e0e0;" text="نشطة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="297.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="297.0" style="-fx-background-color: #e0e0e0e0;" text="عدد المستهدفين بالإعلانات الممولة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="337.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="337.0" style="-fx-background-color: #e0e0e0e0;" text="السعة الإجمالية للأماكن السياحية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="873.0" layoutY="297.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي سعة أماكن الإقامة المحجوزة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="297.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="257.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي سعة وسائل النقل المشاركة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="257.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="214.0" style="-fx-background-color: #e0e0e0e0;" text="التكلفة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="214.0" style="-fx-border-color: #e0e0e0e0;" text="600 ج م" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="410.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="410.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي سعة وسائل النقل المشاركة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="450.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="873.0" layoutY="450.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي سعة أماكن الإقامة المحجوزة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="490.0" style="-fx-background-color: #e0e0e0e0;" text="السعة الإجمالية للأماكن السياحية" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="65.0" layoutY="450.0" style="-fx-background-color: #e0e0e0e0;" text="عدد المستهدفين بالإعلانات الممولة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="450.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="873.0" layoutY="407.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الأيام المستغرقة " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1159.0" layoutY="407.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="450.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="450.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الإعلانات الممولة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="469.0" layoutY="410.0" style="-fx-background-color: #e0e0e0e0;" text="عدد وسائل النقل المشاركة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="756.0" layoutY="410.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="359.0" layoutY="490.0" style="-fx-border-color: #e0e0e0e0;" text="67" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1160.0" layoutY="372.0" style="-fx-border-color: #e0e0e0e0;" text="201" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="874.0" layoutY="372.0" style="-fx-background-color: #e0e0e0e0;" text="إجمالي سعة أماكن الإقامة المحجوزة" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="874.0" layoutY="329.0" style="-fx-background-color: #e0e0e0e0;" text="عدد الأيام المستغرقة " textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <Label alignment="CENTER" layoutX="1160.0" layoutY="329.0" style="-fx-border-color: #e0e0e0e0;" text="73" textAlignment="CENTER" textFill="#8a8888" wrapText="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </ScrollPane>
+                        <TabPane tabClosingPolicy="UNAVAILABLE">
+                          <tabs>
+                            <Tab text="السياح">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                            <Tab text="الأماكن">
+                              <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                              </content>
+                            </Tab>
+                              <Tab text="وسائل النقل">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="أماكن الإقامة">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="المرشدين السياحيين">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="المطبوعات">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                              <Tab text="الإعلانات">
+                                 <content>
+                                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TableView minHeight="44.0" minWidth="300.0">
+                                             <columns>
+                                                <TableColumn prefWidth="274.0" text="رقم الرحلة" />
+                                                <TableColumn prefWidth="554.0" text="عنوان الرحلة" />
+                                                <TableColumn prefWidth="798.0" text="تاريخ البداية" />
+                                                <TableColumn prefWidth="579.0" text="تاريخ الإنتهاء" />
+                                                <TableColumn prefWidth="579.0" text="التكلفة" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </Tab>
+                          </tabs>
+                        </TabPane>
+                        <AnchorPane maxHeight="44.0" minHeight="44.0" prefHeight="44.0">
+                           <children>
+                              <SplitPane dividerPositions="0.5, 0.5" layoutX="19.0" layoutY="7.0" AnchorPane.bottomAnchor="7.0">
+                                 <items>
+                                    <Button layoutX="96.0" layoutY="3.0" mnemonicParsing="false" text="تسجيل جديد" />
+                                    <ToggleButton layoutX="170.0" layoutY="3.0" mnemonicParsing="false" text="حذف تسجيل" />
+                                    <Button layoutX="19.0" layoutY="3.0" mnemonicParsing="false" text="رجوع" />
+                                 </items>
+                              </SplitPane>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+  </children>
+</VBox>
