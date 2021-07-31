@@ -50,7 +50,7 @@ CREATE TABLE Person
 (
 id INT IDENTITY(1,1),
 class NCHAR(3) NOT NULL, -- Class = Guide, Tourist, Agent
-[name] VARCHAR(75) NOT NULL,
+[name] VARCHAR(75) NOT NULL, 
 NID CHAR(14) NOT NULL,
 gender BIT NOT NULL DEFAULT 0,
 mobile CHAR(11) NOT NULL UNIQUE,
@@ -151,7 +151,7 @@ creatDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 designCost MONEY NOT NULL DEFAULT 0,
 cost MONEY NOT NULL DEFAULT 0, -- prINTing cost
 idle BIT NOT NULL DEFAULT 0, 
-CONSTRAINT FK_bruCompanyID FOREIGN KEY (companyID) REFERENCES ServiceProvider(id) ON DELETE SET NULL ON UPDATE CASCADE,
+CONSTRAINT FK_bruCompanyID FOREIGN KEY (companyID) REFERENCES ServiceProvider(id) ON DELETE SET NULL,
 CONSTRAINT PK_Brochure PRIMARY KEY (id)
 );
 
@@ -179,7 +179,7 @@ prtID INT NULL,
 info NVARCHAR(MAX),
 score SMALLINT NOT NULL DEFAULT 0,
 balance MONEY NOT NULL DEFAULT 0,
-CONSTRAINT FK_turPrsID FOREIGN KEY (id) REFERENCES Person(id) ON DELETE CASCADE ON UPDATE CASCADE,
+CONSTRAINT FK_turPrsID FOREIGN KEY (id) REFERENCES Person(id) ON DELETE CASCADE,
 CONSTRAINT FK_turPrtID FOREIGN KEY (prtID) REFERENCES ServiceProvider(id) ON DELETE SET NULL,
 CONSTRAINT PK_Tourist PRIMARY KEY (id)
 );
@@ -310,7 +310,7 @@ regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 cost MONEY NOT NULL DEFAULT 0, -- promotion cost
 CONSTRAINT FK_adTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
 CONSTRAINT FK_adID FOREIGN KEY (adID) REFERENCES Advertisement(id) ON DELETE CASCADE,
-CONSTRAINT PK_RegAdvertisment PRIMARY KEY(trvID,adID)
+CONSTRAINT PK_Campaign PRIMARY KEY(trvID,adID)
 );
 
 GO
@@ -360,7 +360,7 @@ itemID INT NOT NULL,
 [time] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 CONSTRAINT CK_agnActAction CHECK([action] IN ('new', 'edt', 'act','idl', 'del')),
 CONSTRAINT CK_agnActType CHECK([type] IN ('tur', 'trv', 'SPHst','SPTrs','SPad','trs','prt',
-'hst','plc','gud','agn','cty','bru','ad','regTur','regGud','regAd','regBru','regHst','regTrs','regPlc','gudRat','agnRat')),
+'hst','plc','gud','agn','cty','bru','ad','regTur','regGud','cmp','regBru','regHst','regTrs','regPlc','gudRat','agnRat')),
 CONSTRAINT FK_ActionAgnID FOREIGN KEY (agnID) REFERENCES Agent(id) ON DELETE CASCADE,
 CONSTRAINT PK_AgentAction PRIMARY KEY (agnID,[time])
 );
