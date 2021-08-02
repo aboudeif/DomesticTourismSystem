@@ -26,7 +26,7 @@ CONSTRAINT PK_City PRIMARY KEY(id)
 
 Go
 
-CREATE TABLE ServiceProvider --Partners, Hostel owners and transport owners
+CREATE TABLE ServiceProvider --Partners, Hostel owners, transport owners and Advertisement Company
 (
 id INT IDENTITY(1,1),
 class NCHAR(3) NOT NULL, -- Class = Hostel Owner, Transport Owner, Partner, Ad Company
@@ -52,7 +52,7 @@ CREATE TABLE Transport
 id INT IDENTITY (1,1),
 [type] VARCHAR(30) NOT NULL, --Transport type like 'ÃæÊæÈíÓ','ÓíÇÑÉ','ãÑßÈ',..
 ownerID INT NULL,
-number VARCHAR(25) NULL,
+panelNo VARCHAR(25) NULL,
 model NVARCHAR(30) NULL,
 capacity SMALLINT DEFAULT 0 CHECK(capacity >= 0),
 cityID INT NULL,
@@ -101,21 +101,11 @@ CONSTRAINT PK_Place PRIMARY KEY (id)
 );
 
 Go
-
-CREATE TABLE GuideRate
-(
-exDegree INT NOT NULL DEFAULT 0, -- experience degree
-rate MONEY NOT NULL DEFAULT 0,
-CONSTRAINT CK_gudExDegree CHECK (exDegree BETWEEN 0 AND 5),
-CONSTRAINT PK_GuideRate PRIMARY KEY (exDegree)
-);
-
-GO
+USE [DTSDB]
 
 CREATE TABLE Guide
 (
 id INT IDENTITY(1,1),
-exDegree INT,
 specialty VARCHAR(15) NOT NULL,  -- specialty like 'ÊÑÝíåí','ÓÇÍáí','ÝÑÚæäí',..
 [name] VARCHAR(75) NOT NULL, 
 NID CHAR(14) NOT NULL,
@@ -125,25 +115,12 @@ birthDate DATE NOT NULL,
 email NVARCHAR(75),
 cityID INT NULL,
 localAdd VARCHAR(100),
+rate MONEY NOT NULL DEFAULT 0,
 creatDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 idle BIT NOT NULL DEFAULT 0,
-CONSTRAINT FK_gudExDegree FOREIGN KEY (exDegree) REFERENCES GuideRate(exDegree) ON DELETE SET NULL ON UPDATE CASCADE,
 CONSTRAINT PK_Guide PRIMARY KEY (id)
 );
 
-Go
-CREATE TABLE Brochure
-(
-id INT IDENTITY(1,1),
-companyID INT NULL,
-pages TINYINT NOT NULL DEFAULT 0,
-creatDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
-designCost MONEY NOT NULL DEFAULT 0,
-cost MONEY NOT NULL DEFAULT 0, -- prINTing cost
-idle BIT NOT NULL DEFAULT 0, 
-CONSTRAINT FK_bruCompanyID FOREIGN KEY (companyID) REFERENCES ServiceProvider(id) ON DELETE SET NULL,
-CONSTRAINT PK_Brochure PRIMARY KEY (id)
-);
 
 Go
 
@@ -155,7 +132,6 @@ creatDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 idle BIT NOT NULL DEFAULT 0, 
 startDate DATE NOT NULL,
 endDate DATE NOT NULL,
-daysNum TINYINT NOT NULL DEFAULT 0,
 price MONEY NOT NULL DEFAULT 0,
 CONSTRAINT PK_Travel PRIMARY KEY (id)
 );
@@ -167,7 +143,6 @@ CREATE TABLE Tourist
 id INT IDENTITY(1,1),
 prtID INT NULL,
 info NVARCHAR(MAX),
-score SMALLINT NOT NULL DEFAULT 0,
 balance MONEY NOT NULL DEFAULT 0,
 [name] VARCHAR(75) NOT NULL, 
 NID CHAR(14) NOT NULL,
@@ -188,7 +163,7 @@ GO
 CREATE TABLE Phone
 (
 id INT,
-phone CHAR(11) UNIQUE NOT NULL,
+phone VARCHAR(11) UNIQUE NOT NULL,
 fax BIT NULL,
 CONSTRAINT FK_phPrsID FOREIGN KEY (id) REFERENCES ServiceProvider(id) ON DELETE CASCADE,
 CONSTRAINT PK_Phone PRIMARY KEY(id,phone)
@@ -200,7 +175,7 @@ CREATE TABLE Advertisement
 (
 id INT IDENTITY(1,1),
 companyID INT NULL,
-info VARCHAR(250),
+info VARCHAR(MAX),
 designCost MONEY NOT NULL DEFAULT 0,
 CREATEDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 idle BIT NOT NULL DEFAULT 0,
@@ -215,7 +190,6 @@ CREATE TABLE RegTransport
 (
 trvID INT,
 trsID INT,
-setsNum TINYINT NOT NULL,
 daysNum TINYINT NOT NULL,
 totalCost MONEY NOT NULL DEFAULT 0, --computed attribute = trsCost * daysNum
 regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
@@ -245,7 +219,6 @@ CREATE TABLE RegPlace
 (
 trvID INT,
 plcID INT,
-visitorsNum SMALLINT NOT NULL DEFAULT 0,
 regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 totalCost MONEY NOT NULL DEFAULT 0, --computed attribute = plcCost * visitorsNum
 CONSTRAINT FK_plcTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
@@ -259,7 +232,7 @@ CREATE TABLE RegGuide
 (
 trvID INT,
 gudID INT,
-groupNum TINYINT NOT NULL DEFAULT 0,
+daysNum TINYINT NOT NULL DEFAULT 0,
 regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 totalCost MONEY NOT NULL DEFAULT 0, --computed attribute = gudCost * groupNum
 CONSTRAINT FK_gudTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
@@ -282,55 +255,33 @@ CONSTRAINT PK_RegTourist PRIMARY KEY(trvID,turID)
 
 Go
 
-CREATE TABLE RegBrochure
-(
-trvID INT,
-bruID INT,
-quantity SMALLINT NOT NULL DEFAULT 0,
-regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
-totalCost MONEY NOT NULL DEFAULT 0, --computed attribute = bruCost * quantity
-CONSTRAINT FK_bruTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
-CONSTRAINT FK_bruID FOREIGN KEY (bruID) REFERENCES Brochure(id) ON DELETE CASCADE,
-CONSTRAINT PK_RegBrochure PRIMARY KEY(trvID,bruID)
-);
-
-GO
 
 CREATE TABLE Campaign
 (
-trvID INT,
-adID INT,
+id INT IDENTITY(1,1),
+trvID INT NOT NULL,
+adID INT NOT NULL,
 media NVARCHAR(50) NOT NULL,
-targetedNum INT NOT NULL DEFAULT 0,
-reachedNum INT NOT NULL DEFAULT 0,
+targetedNum INT NULL,
+reachedNum INT NULL,
 startDate DATE NOT NULL,
 endDate DATE NULL,
 regDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 cost MONEY NOT NULL DEFAULT 0, -- promotion cost
-CONSTRAINT FK_adTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
+idle BIT NOT NULL DEFAULT 0,
+CONSTRAINT FK_cmpTrvID FOREIGN KEY (trvID) REFERENCES Travel(id) ON DELETE CASCADE,
 CONSTRAINT FK_adID FOREIGN KEY (adID) REFERENCES Advertisement(id) ON DELETE CASCADE,
-CONSTRAINT PK_Campaign PRIMARY KEY(trvID,adID)
+CONSTRAINT PK_Campaign PRIMARY KEY(id)
 );
 
-GO
-
-CREATE TABLE AgentRate
-(
-id INT,
-[role] NCHAR(10) NOT NULL UNIQUE, -- roles are (operator, supervisor, admin)
-rate MONEY NOT NULL DEFAULT 0,
-CONSTRAINT CK_agnRole CHECK ([role] IN (N'operator', N'supervisor', N'admin')),
-CONSTRAINT PK_AgentRate PRIMARY KEY (id)
-);
 
 GO
 
 CREATE TABLE Agent
 (
 id INT IDENTITY(1,1),
-roleID INT,
 usrID NCHAR(10) UNIQUE NOT NULL,
-[password] NVARCHAR(30),
+[password] NVARCHAR(30) NOT NULL,
 [name] VARCHAR(75) NOT NULL, 
 NID CHAR(14) NOT NULL,
 gender BIT NOT NULL DEFAULT 0,
@@ -341,46 +292,12 @@ cityID INT NULL,
 localAdd VARCHAR(100),
 creatDate SMALLDATETIME NOT NULL DEFAULT GETDATE(),
 idle BIT NOT NULL DEFAULT 0,
-CONSTRAINT FK_agnRoleID FOREIGN KEY (roleID) REFERENCES AgentRate(id) ON DELETE SET NULL ON UPDATE CASCADE,
 CONSTRAINT PK_Agent PRIMARY KEY (id)
 );
 
-Go
-
-CREATE TABLE AgentLog
-(
-id INT IDENTITY(1,1),
-agnID INT,
-[log] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
-[type] BIT DEFAULT 0, -- 0=LOGin, 1=LOGout
-CONSTRAINT FK_logUsrID FOREIGN KEY (agnID) REFERENCES Agent(id) ON DELETE CASCADE,
-CONSTRAINT PK_AgentLog PRIMARY KEY (id)
-);
-
-Go
-
-CREATE TABLE AgentAction
-(
-agnID INT,
-[action] NCHAR(3) NOT NULL, -- Actions are ('new', 'edit', 'active','idle', 'delete')
-[type] NCHAR(6) NOT NULL, -- Types like Turist, Travel, ..
-itemID INT NOT NULL,
-[time] SMALLDATETIME NOT NULL DEFAULT GETDATE(),
-CONSTRAINT CK_agnActAction CHECK([action] IN ('new', 'edt', 'act','idl', 'del')),
-CONSTRAINT CK_agnActType CHECK([type] IN ('tur', 'trv', 'SPHst','SPTrs','SPad','trs','prt',
-'hst','plc','gud','agn','cty','bru','ad','regTur','regGud','cmp','regBru','regHst','regTrs','regPlc','gudRat','agnRat')),
-CONSTRAINT FK_ActionAgnID FOREIGN KEY (agnID) REFERENCES Agent(id) ON DELETE CASCADE,
-CONSTRAINT PK_AgentAction PRIMARY KEY (agnID,[time])
-);
 
 
 
---23 direct action class 
---3 indirect show class 
--- telephone and email report
--- production [pro,combany balance, call cost,design cost(c)]
---or company open balance[ year, balance, ÏÇÆä, ãÏíä
--- ÇáÍÓÇÈ ÇáãÝÕá > ÊÇÑíÎ ÇáÚãáíÉ - ÇáÞíãÉ - äæÚ ÇáÚãáíÉ - ÇáÑÕíÏ - ÏÇÆä - ãÏíä>
 
 
 
@@ -392,13 +309,10 @@ Hostel    --> hst
 Place     --> plc
 Guide     --> gud
 Tourist   --> tur
-Brochure  --> bru
 Agent --> agn
 Advertisement --> ad
-Person --> prs
 City-->cty
-GuideRate--> gudRat
-AgentRate--> agnRat
+
 
 
 */
