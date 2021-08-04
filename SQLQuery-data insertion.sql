@@ -101,6 +101,7 @@ INSERT INTO Tourist (prtID ,info,balance,[name],NID,gender,mobile,birthDate,emai
 					(NULL,NULL,500.0,'ÇáÓíÏ ÝÖá ÚæíÓ','32226598745213',0,'01212333666','2005-8-20',NULL,4,'ÚãÇÑÉ 23 ÃãÇã ãÍØÉ ÑãÓíÓ'),
 					(NULL,NULL,900.0,'ãÑæÇä ÚÈÏ ÇáÞÇÏÑ ÍÓíä','32558745651245',0,'01285469855','2002-7-23',NULL,3,'ÔÇÑÚ 56 ãäØÞÉ 6 Íí 11'),
 					(6,NULL,1700.0,'íæÓÝ ãÍãÏ ÚÈÇÓ','26510014121321',0,'01263611110','2000-9-17',NULL,3,'ÑÞã 7 ÔÇÑÚ ÇáÍí ÈÌæÇÑ ãÈäí ÇáÍí ÇáÞÏíã');
+
 INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost)
 			VALUES       (1,2,2,2*(SELECT cost FROM Transport WHERE id = 2)),
 						 (1,5,1,1*(SELECT cost FROM Transport WHERE id = 5)),
@@ -120,12 +121,12 @@ INSERT INTO RegTourist (trvID,turID,actualProfit)
 					   (2,15,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 15))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
 					   (1,4,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 4))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
 					   (1,6,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 6))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1));
-INSERT INTO RegPlace (trvID,plcID,totalCost)
-			VALUES	 (1,7,(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = 1)*(SELECT cost FROM Place WHERE id = 7)),
-					 (2,2,(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = 2)*(SELECT cost FROM Place WHERE id = 2)),
-					 (2,3,(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = 2)*(SELECT cost FROM Place WHERE id = 3)),
-					 (1,6,(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = 1)*(SELECT cost FROM Place WHERE id = 6)),
-					 (2,1,(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = 2)*(SELECT cost FROM Place WHERE id = 1));
+INSERT INTO RegPlace (trvID,plcID)
+			VALUES	 (1,7),
+					 (2,2),
+					 (2,3),
+					 (1,6),
+					 (2,1);
 INSERT INTO RegHostel (trvID,hstID,roomNum,nightsNum,totalCost)
 			VALUES	 (1,1,100,1,4*1*(SELECT cost FROM Hostel WHERE Hostel.id = 1)),
 					 (2,3,50,2,2*2*(SELECT cost FROM Hostel WHERE Hostel.id = 3)),
@@ -159,3 +160,25 @@ INSERT INTO Campaign (trvID,adID,media,targetedNum,reachedNum,startDate,endDate,
 					 (2,1,'Facebook',7000,6000,'2021-8-1','2021-8-7',150.0),
 					 (2,1,'Youtube',6000,4000,'2021-8-2','2021-8-5',100.0),
 					 (1,3,'instagram',17000,1500,'2021-8-13','2021-8-23',600.0);
+
+-- new tourist
+INSERT INTO Tourist (prtID ,info,balance,[name],NID,gender,mobile,birthDate,email,cityID,localAdd)
+					VALUES			(6,NULL,1200.0,'ÍÓä ãÍãÏ ÚÈÇÓ','26510010021321',0,'01263001110','2000-9-17',NULL,3,'ÑÞã 7 ÔÇÑÚ ÇáÍí ÈÌæÇÑ ãÈäí ÇáÍí ÇáÞÏíã');
+-- reg tourist
+DECLARE @turprft AS MONEY = (SELECT price FROM Travel WHERE id = 1)-
+		   (ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 16)),0)*
+		   (SELECT price FROM Travel WHERE id = 1))
+IF (SELECT balance FROM Tourist WHERE id = 16) >= @turprft
+	BEGIN
+	INSERT INTO RegTourist (trvID,turID,actualProfit) VALUES (1,16,@turprft)
+	UPDATE Tourist SET balance = (balance-@turprft) WHERE id = 16
+	END
+ELSE
+	SELECT 'Not enugh balance'
+
+-- del reg tourist
+UPDATE Tourist SET balance = (balance+(SELECT actualProfit FROM RegTourist WHERE trvID = 1 AND turID = 16)) WHERE id = 16
+DELETE RegTourist WHERE trvID = 1 AND turID = 16
+
+
+select * from Tourist
