@@ -244,7 +244,8 @@ public class DBQuery {
         tourist.getEmail()+"',"+
         cityID+",'"+
         tourist.getLocalAddress()+"',"+
-        prtIDStr+",'"+
+        prtIDStr
+        +",'"+
         tourist.getInfo()+"',"+
         Double.toString(tourist.getBalance())+","+
         +idleBit+");";
@@ -358,4 +359,198 @@ public class DBQuery {
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
 
+    public static List<Travel> getTravelData() throws Exception{
+        List<Travel> list = new ArrayList<>();
+
+        String sqlString = "SELECT * FROM [Travel];";
+        ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
+        while (res.next()) {
+            Travel t = new Travel();
+            t.setId(res.getInt("id"));
+            t.setTitle(res.getString("title"));
+            t.setCreatDate(res.getDate("creatDate"));
+            t.setIdle(res.getBoolean("idle"));
+            t.setStartDate(res.getDate("startDate"));
+            t.setEndDate(res.getDate("endDate"));
+            t.setPrice(res.getDouble("price"));
+            list.add(t);
+        }
+
+        return list;
+    }
+
+    public static String getTravelReport(int travelID) throws Exception{
+        String str = "";
+        
+        // -- عنوان الرحلة
+        // SELECT title FROM Travel WHERE id = 2;
+        str += "/*  عنوان الرحلة  */\n";
+        String sql = "SELECT [title] FROM [Travel] WHERE [id] = "+travelID+";";
+        ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getString("title");
+        str += "\n\n";
+
+
+        str += "/*  تاريخ الإنشاء  */\n";
+        sql = "SELECT [creatDate] FROM [Travel] WHERE [id] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getString("creatDate");
+        str += "\n\n";
+
+        str += "/*  الحالة  */\n";
+        sql = "SELECT [idle] FROM [Travel] WHERE [id] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getString("idle");
+        str += "\n\n";
+
+        str += "/*  تاريخ بداية الرحل  */\n";
+        sql = "SELECT [startDate] FROM [Travel] WHERE [id] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDate("startDate").toString();
+        str += "\n\n";
+        
+        str += "/*  تاريخ نهاية الرحل  */\n";
+        sql = "SELECT [endDate] FROM [Travel] WHERE [id] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDate("endDate").toString();
+        str += "\n\n";
+
+        str += "/*  عدد أيام الرحلة  */\n";
+        sql = "SELECT DATEDIFF(DAY, (SELECT [startDate] FROM Travel WHERE [id] = "+travelID+") ,"+
+        "(SELECT [endDate] FROM [Travel] WHERE id = "+travelID+")) as 'NumOfDays'";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("NumOfDays");
+        str += "\n\n";
+        
+        str += "/*  سعر الرحلة للفرد  */\n";
+        sql = "SELECT [price] FROM [Travel] WHERE [id] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("price");
+        str += "\n\n";
+       
+        str += "/*  إجمالي عدد السياح المشتركين  */\n";
+        sql = "SELECT COUNT([trvID]) as 'count' FROM RegTourist WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+        
+        str += "/*  إجمالي عدد وسائل النقل المشاركة  */\n";
+        sql = "SELECT COUNT([totalCost]) as 'count' FROM [RegTransport] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+        
+        str += "/*  التكلفة الإجمالية لوسائل النقل المشاركة  */\n";
+        sql = "SELECT SUM([totalCost]) 'cost' FROM RegTransport WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("cost");
+        str += "\n\n";
+        
+        str += "/*  إجمالي عدد أماكن الإقامة المحجوزة  */\n";
+        sql = "SELECT COUNT([trvID]) 'count' FROM [RegHostel] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+        
+        str += "/*  التكلفة الإجمالية لأماكن الإقامة المحجوزة  */\n";
+        sql = "SELECT SUM([totalCost]) 'cost' FROM [RegHostel] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("cost");
+        str += "\n\n";
+        
+        str += "/*  إجمالي عدد المرشدين السياحين  */\n";
+        sql = "SELECT COUNT([trvID]) 'count' FROM [RegGuide] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+        
+        str += "/*  التكلفة الإجمالية للمرشدين السياحين المشاركين  */\n";
+        sql = "SELECT SUM([totalCost]) 'cost' FROM [RegGuide] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("cost");
+        str += "\n\n";
+        
+        str += "/*  إجمالي عدد الأماكن السياحية المسجلة  */\n";
+        sql = "SELECT COUNT([trvID]) 'count' FROM [RegPlace] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+
+        str += "/*  التكلفة الإجمالية لزيارة للأماكن السياحية  */\n";
+        sql = "SELECT (SELECT SUM(cost) FROM [Place] WHERE [id] in "+
+        "(SELECT [plcID] FROM [RegPlace] WHERE [trvID] = 2)) * "+
+        "(SELECT COUNT([trvID]) FROM [RegTourist] WHERE [trvID] = "+travelID+") 'cost';";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("cost");
+        str += "\n\n";
+
+        str += "/*  إجمالي عدد الأعلانات المنشورة  */\n";
+        sql = "SELECT COUNT(trvID) 'count' FROM Campaign WHERE trvID = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getInt("count");
+        str += "\n\n";
+
+        str += "/*  التكلفة الإجمالية للأعلانات المنشورة  */\n";
+        sql = "SELECT SUM([cost]) 'cost' FROM [Campaign] WHERE [trvID] = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("cost");
+        str += "\n\n";
+
+        str += "/*  إجمالي عائدات الرحلة  */\n";
+        sql = "SELECT SUM(actualProfit) 'profit' FROM RegTourist WHERE trvID = "+travelID+";";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("profit");
+        str += "\n\n";
+
+        str += "/*  إجمالي تكلفة الرحلة  */\n";
+        sql = "DECLARE  @id AS int = "+travelID+
+        "DECLARE  @cost AS MONEY = (SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id) +"+
+        "(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) +"+
+        "((SELECT SUM(cost) FROM Place WHERE id in (SELECT plcID FROM RegPlace WHERE trvID = @id))*"+
+        "(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id)) +"+
+        "(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) +"+
+        "(SELECT SUM(cost) FROM Campaign WHERE trvID = @id)"+
+        "SELECT @cost 'totalcost';";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("totalcost");
+        str += "\n\n";
+        
+        str += "/*  صافي ربح الرحلة  */\n";
+        sql = "DECLARE  @trvid AS int = "+travelID+
+        "DECLARE  @trvprofit AS MONEY = (SELECT SUM(actualProfit) FROM RegTourist WHERE trvID = @trvid)-"+
+        "((SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @trvid)+"+
+        "(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @trvid) +"+
+        "((SELECT SUM(cost) FROM Place WHERE id in (SELECT plcID FROM RegPlace WHERE trvID = @trvid))*"+
+        "(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @trvid))+"+
+        "(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @trvid) +"+
+        "(SELECT SUM(cost) FROM Campaign WHERE trvID = @trvid))"+
+        "SELECT @trvprofit 'totalprofit';";
+        res = DBConnector.getConnection().createStatement().executeQuery(sql);
+        res.next();
+        str += res.getDouble("totalprofit");
+        str += "\n\n";
+
+
+        return str;
+    }
 }

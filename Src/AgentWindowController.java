@@ -107,14 +107,7 @@ public class AgentWindowController implements Initializable {
             gender = true;
         String mobile = mobileField.getText();
         Date birthDate = Date.valueOf(datePicker.getValue());
-        String email = emailField.getText();
-        
-        // int cityID = -1;
-        // try {
-        //     cityID = DBQuery.getCityID(cityComboBox.getValue());
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
+        String email = emailField.getText();        
         String city = cityComboBox.getValue();
         String localAddress = localAddressField.getText();
         String usrID = userAccountField.getText();

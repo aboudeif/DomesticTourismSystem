@@ -12,7 +12,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -31,6 +33,9 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private TableView<Agent> agentTable;
+    
+    @FXML
+    private TableView<Travel> travelTable;
 
     @FXML
     void refreshAgent(ActionEvent event) {
@@ -195,6 +200,38 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    @FXML
+    void createTravelReport(ActionEvent event){
+        Travel currentTravel = travelTable.getSelectionModel().getSelectedItem();
+        if(currentTravel == null)
+            return;
+
+        try {
+            TextArea textArea = new TextArea();
+            textArea.setEditable(false);
+            textArea.setText(DBQuery.getTravelReport(currentTravel.getId()));
+            
+            
+            AnchorPane anchor = new AnchorPane();
+            anchor.getChildren().addAll(textArea);
+            anchor.setBottomAnchor(textArea, 0.0);
+            anchor.setTopAnchor(textArea, 0.0);
+            anchor.setLeftAnchor(textArea, 0.0);
+            anchor.setRightAnchor(textArea, 0.0);
+
+
+            Scene scene = new Scene(anchor, 640, 480);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Store the Instance
@@ -204,6 +241,7 @@ public class MainWindowController implements Initializable {
         initAgentTableView();
         initTouristTableView();
         initGuideTableView();
+        initTravelTableView();
         
     }
 
@@ -423,6 +461,55 @@ public class MainWindowController implements Initializable {
         if(guideTable != null)
             for (Guide g : list)
                 guideTable.getItems().add(g);
+    }
+
+    void initTravelTableView(){
+        travelTable.getColumns().clear();
+        
+        TableColumn<Travel, Integer> idColumn = new TableColumn<>("ID");
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        travelTable.getColumns().add(idColumn);
+        
+        TableColumn<Travel, String> titleColumn = new TableColumn<>("Title");
+        titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
+        travelTable.getColumns().add(titleColumn);
+        
+        TableColumn<Travel, Date> createDateColumn = new TableColumn<>("Create Date");
+        createDateColumn.setCellValueFactory(new PropertyValueFactory<>("creatDate"));
+        travelTable.getColumns().add(createDateColumn);
+        
+        TableColumn<Travel, Boolean> idleColumn = new TableColumn<>("Idle");
+        idleColumn.setCellValueFactory(new PropertyValueFactory<>("idle"));
+        travelTable.getColumns().add(idleColumn);
+        
+        TableColumn<Travel, Date> startDateColumn = new TableColumn<>("Start Date");
+        startDateColumn.setCellValueFactory(new PropertyValueFactory<>("startDate"));
+        travelTable.getColumns().add(startDateColumn);
+        
+        TableColumn<Travel, Date> endDateColumn = new TableColumn<>("End Date");
+        endDateColumn.setCellValueFactory(new PropertyValueFactory<>("endDate"));
+        travelTable.getColumns().add(endDateColumn);
+        
+        TableColumn<Travel, Double> priceColumn = new TableColumn<>("Price");
+        priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        travelTable.getColumns().add(priceColumn);
+
+        refreshTravelTableView();
+    }
+
+    void refreshTravelTableView(){
+        travelTable.getItems().clear();
+
+        List<Travel> list = null;
+        try {
+            list = DBQuery.getTravelData();
+            if(travelTable != null)
+                for(Travel t : list)
+                    travelTable.getItems().add(t);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
