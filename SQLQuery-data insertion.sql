@@ -109,18 +109,18 @@ INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost)
 						 (2,3,1,1*(SELECT cost FROM Transport WHERE id = 3)),
 						 (2,6,3,3*(SELECT cost FROM Transport WHERE id = 6));
 INSERT INTO RegTourist (trvID,turID,actualProfit)
-			VALUES	   (1,1,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 1))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (2,10,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 10))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
-					   (1,5,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 5))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (1,2,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 2))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (2,8,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 8))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
-					   (1,3,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 3))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (2,9,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 9))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
-					   (1,7,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 7))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (2,14,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 14))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
-					   (2,15,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 15))*-1*(SELECT price FROM Travel WHERE id = 2),0)+(SELECT price FROM Travel WHERE id = 2)),
-					   (1,4,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 4))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1)),
-					   (1,6,ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 6))*-1*(SELECT price FROM Travel WHERE id = 1),0)+(SELECT price FROM Travel WHERE id = 1));
+			VALUES	   (1,1,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 16)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (2,10,(SELECT price FROM Travel WHERE id = 2)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 10)),0)*(SELECT price FROM Travel WHERE id = 2)),
+					   (1,5,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 5)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (1,2,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 2)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (2,8,(SELECT price FROM Travel WHERE id = 2)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 8)),0)*(SELECT price FROM Travel WHERE id = 2)),
+					   (1,3,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 3)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (2,9,(SELECT price FROM Travel WHERE id = 2)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 9)),0)*(SELECT price FROM Travel WHERE id = 2)),
+					   (1,7,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 7)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (2,14,(SELECT price FROM Travel WHERE id = 2)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 14)),0)*(SELECT price FROM Travel WHERE id = 2)),
+					   (2,15,(SELECT price FROM Travel WHERE id = 2)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 15)),0)*(SELECT price FROM Travel WHERE id = 2)),
+					   (1,4,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 4)),0)*(SELECT price FROM Travel WHERE id = 1)),
+					   (1,6,(SELECT price FROM Travel WHERE id = 1)-ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 6)),0)*(SELECT price FROM Travel WHERE id = 1));
 INSERT INTO RegPlace (trvID,plcID)
 			VALUES	 (1,7),
 					 (2,2),
@@ -166,8 +166,8 @@ INSERT INTO Tourist (prtID ,info,balance,[name],NID,gender,mobile,birthDate,emai
 					VALUES			(6,NULL,1200.0,'ÍÓä ãÍãÏ ÚÈÇÓ','26510010021321',0,'01263001110','2000-9-17',NULL,3,'ÑÞã 7 ÔÇÑÚ ÇáÍí ÈÌæÇÑ ãÈäí ÇáÍí ÇáÞÏíã');
 -- reg tourist
 DECLARE @turprft AS MONEY = (SELECT price FROM Travel WHERE id = 1)-
-		   (ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 16)),0)*
-		   (SELECT price FROM Travel WHERE id = 1))
+		  ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = 16)),0)*
+		   (SELECT price FROM Travel WHERE id = 1)
 IF (SELECT balance FROM Tourist WHERE id = 16) >= @turprft
 	BEGIN
 	INSERT INTO RegTourist (trvID,turID,actualProfit) VALUES (1,16,@turprft)
@@ -177,8 +177,10 @@ ELSE
 	SELECT 'Not enugh balance'
 
 -- del reg tourist
-UPDATE Tourist SET balance = (balance+(SELECT actualProfit FROM RegTourist WHERE trvID = 1 AND turID = 16)) WHERE id = 16
-DELETE RegTourist WHERE trvID = 1 AND turID = 16
+UPDATE Tourist SET balance = (balance+(SELECT actualProfit FROM RegTourist WHERE trvID = 1 AND turID = 1)) WHERE id = 1
+DELETE RegTourist WHERE trvID = 1 AND turID = 1
+
+-- test
+select * from RegTourist
 
 
-select * from Tourist
