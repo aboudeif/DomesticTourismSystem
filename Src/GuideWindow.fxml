@@ -6,7 +6,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="AgentWindowController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GuideWindowController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
         <content>
@@ -47,11 +47,11 @@
                         <ComboBox fx:id="cityComboBox" layoutX="75.0" layoutY="64.0" prefHeight="25.0" prefWidth="193.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Label text="Local Adress" GridPane.rowIndex="7" />
                         <TextField fx:id="localAddressField" prefHeight="30.0" prefWidth="269.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <Label text="User Account" GridPane.rowIndex="8" />
-                        <TextField fx:id="userAccountField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                        <Label text="User Password" GridPane.rowIndex="9" />
-                        <PasswordField fx:id="userPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                        <Label text="Specialty" GridPane.rowIndex="8" />
+                        <TextField fx:id="specialtyField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <Label text="Rate" GridPane.rowIndex="9" />
                         <Label text="Is Idle" GridPane.rowIndex="10" />
+                        <TextField fx:id="rateField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                         <CheckBox fx:id="idleCheckBox" mnemonicParsing="false" prefHeight="17.0" prefWidth="277.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                      </children>
                      <padding>
@@ -70,7 +70,7 @@
       </ScrollPane>
    </center>
    <top>
-      <Label fx:id="titleLabel" text="Add Agent" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label fx:id="titleLabel" text="Add Guide" textAlignment="CENTER" BorderPane.alignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

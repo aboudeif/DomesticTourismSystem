@@ -8,11 +8,37 @@ public abstract class Person {
     private String mobile;
     private Date birthDate;
     private String email;
-    private int cityID;
+    // private int cityID;
+    private String city;
     private String localAddress;
     private Date createDate;
-
+    private boolean idle;
+    
     public Person(){
+    }
+    
+    // public int getCityID() {
+    //     return cityID;
+    // }
+
+    // public void setCityID(int cityID) {
+    //     this.cityID = cityID;
+    // }
+    
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public boolean isIdle() {
+        return idle;
+    }
+
+    public void setIdle(boolean idle) {
+        this.idle = idle;
     }
 
     public Date getCreateDate() {
@@ -31,13 +57,6 @@ public abstract class Person {
         this.localAddress = localAddress;
     }
 
-    public int getCityID() {
-        return cityID;
-    }
-
-    public void setCityID(int cityID) {
-        this.cityID = cityID;
-    }
 
     public String getEmail() {
         return email;

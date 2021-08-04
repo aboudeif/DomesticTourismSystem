@@ -77,6 +77,7 @@ public class DBConnector {
     }
 
     /*
+    // Example
     // public static void main(String[] args) throws Exception {
         // Statement statement = DBConnector.getConnection().createStatement();
         // ResultSet rs = statement.executeQuery("SELECT * FROM [Student];");

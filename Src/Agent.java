@@ -4,14 +4,13 @@ import java.sql.Date;
 public class Agent extends Person {
     private String usrID;
     private String password;
-    private int roleID;
 
     public Agent(){
     }
 
     public Agent(int id, String name, String nid, String gender, String mobile, Date birthDate,
-     String email, int cityID, String localAddress, Date createDate, String userID, String password,
-      int roleID){
+     String email, String city, String localAddress, Date createDate, String userID, String password,
+     boolean idle){
         this.setId(id);
         this.setName(name);
         this.setNid(nid);
@@ -19,12 +18,12 @@ public class Agent extends Person {
         this.setMobile(mobile);
         this.setBirthDate(birthDate);
         this.setEmail(email);
-        this.setCityID(cityID);
+        this.setCity(city);
         this.setLocalAddress(localAddress);
         this.setCreateDate(createDate);
         this.setUsrID(usrID);
         this.setPassword(password);
-        this.setRoleID(roleID);
+        this.setIdle(idle);
     }
     
     public String getUsrID() {
@@ -43,11 +42,4 @@ public class Agent extends Person {
         this.password = password;
     }
 
-    public int getRoleID() {
-        return roleID;
-    }
-
-    public void setRoleID(int roleID) {
-        this.roleID = roleID;
-    }
 }
