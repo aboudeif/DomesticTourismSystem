@@ -1,0 +1,1 @@
+window.repositoryObject = {"object_id":"d6","name":"DTSDB@MACHINE","description":null,"summary":[{"field":"Host","value":"MACHINE"},{"field":"Database","value":"DTSDB"},{"field":"DBMS","value":"SQL Server"}],"modules":[{"id":"m107","name":"New module"}],"dbObjects":[{"count":17,"id":"d6t","name":"Tables"}],"show_schema":false};
