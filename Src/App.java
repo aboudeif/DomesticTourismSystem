@@ -35,6 +35,7 @@ public class App extends Application {
         }
 
         primaryStage.setScene(loginScene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

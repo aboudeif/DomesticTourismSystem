@@ -64,8 +64,8 @@ public class AgentWindowController implements Initializable {
     public void setAgent(Agent agent) {
         this.agent = agent;
 
-        if(agent.getGender().equals("Female"))
-            this.genderComboBox.setValue("Female");
+        if(agent.getGender().equals("أنثي"))
+            this.genderComboBox.setValue("أنثي");
         
         // String cityName = "";
         // try {
@@ -84,6 +84,10 @@ public class AgentWindowController implements Initializable {
         this.userAccountField.setText(agent.getUsrID());
         this.userPasswordField.setText(agent.getPassword());
         this.idleCheckBox.setSelected(agent.isIdle());
+        //if(agent.getIdle().equals("نشط"))
+        //    this.idleCheckBox.setSelected(false);
+        //if(agent.getIdle().equals("معطل"))
+         //   this.idleCheckBox.setSelected(true); 
     }
 
     public boolean isEditOp() {
@@ -93,9 +97,9 @@ public class AgentWindowController implements Initializable {
     public void setEditOp(boolean isEditOp) {
         this.isEditOp = isEditOp;
         if(isEditOp)
-            this.titleLabel.setText("Edit Agent");
+            this.titleLabel.setText("تعديل موظف");
         else
-            this.titleLabel.setText("Add Agent");
+            this.titleLabel.setText("موظف جديد");
     }
 
     void addAgentOperation(ActionEvent event) {
@@ -143,6 +147,10 @@ public class AgentWindowController implements Initializable {
         this.agent.setUsrID(this.userAccountField.getText());
         this.agent.setPassword(this.userPasswordField.getText());
         this.agent.setIdle(this.idleCheckBox.isSelected());
+        // if(agent.getIdle().equals("نشط"))
+          //  this.idleCheckBox.setSelected(false);
+        //if(agent.getIdle().equals("معطل"))
+          //  this.idleCheckBox.setSelected(true); 
 
         try {
             DBQuery.editAgent(this.agent);
@@ -240,9 +248,9 @@ public class AgentWindowController implements Initializable {
         });
 
         // Populate UI
-        genderComboBox.getItems().add("Male");        
-        genderComboBox.getItems().add("Female");
-        genderComboBox.setValue("Male");
+        genderComboBox.getItems().add("ذكر");        
+        genderComboBox.getItems().add("أنثي");
+        genderComboBox.setValue("ذكر");
 
         try{
             List<String> cityList = DBQuery.getCityData();

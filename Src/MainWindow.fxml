@@ -1,114 +1,771 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="640.0" prefWidth="760.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindowController">
-   <top>
-      <HBox BorderPane.alignment="TOP_CENTER">
-         <children>
-            <MenuBar fx:id="menuBar" nodeOrientation="LEFT_TO_RIGHT" HBox.hgrow="ALWAYS">
-               <menus>
-                  <Menu mnemonicParsing="false" text="Edit">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#createTravelReport" text="Travel Report" />
-                    </items>
-                  </Menu>
-               </menus>
-            </MenuBar>
-         </children>
-      </HBox>
-   </top>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="640.0" prefWidth="909.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainWindowController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" BorderPane.alignment="CENTER">
         <content>
           <AnchorPane>
                <children>
-                  <TabPane minHeight="480.0" minWidth="640.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <TabPane fx:id="tabPane" minHeight="480.0" minWidth="640.0" tabClosingPolicy="ALL_TABS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <tabs>
-                        <Tab text="Agent">
+                        <Tab fx:id="scheduleTab" text="الرحلات الحالية">
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <TableView fx:id="agentTable" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView id="table-view" fx:id="scheduleTable" layoutY="1.0" prefHeight="586.0" prefWidth="758.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                       <effect>
+                                          <SepiaTone level="0.5" />
+                                       </effect>
+                                    </TableView>
+                                    <ImageView fitHeight="412.0" fitWidth="477.0" layoutX="229.0" nodeOrientation="INHERIT" opacity="0.13" pickOnBounds="true" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="0.0">
+                                       <image>
+                                          <Image url="@Img/schedule.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="adTab" text="الإعلانات">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="adSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="adSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="adTable" prefHeight="506.0" prefWidth="907.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="14.0">
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
                                        <children>
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshAgent" prefHeight="35.0" prefWidth="100.0" text="Refresh" />
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAgent" prefHeight="35.0" prefWidth="100.0" text="Delete Agent" />
-                                          <Button mnemonicParsing="false" onAction="#editAgent" prefHeight="35.0" prefWidth="100.0" text="Edit Agent" />
-                                          <Button mnemonicParsing="false" onAction="#addAgent" prefHeight="35.0" prefWidth="100.0" text="Add Agent" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshAd" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addAd" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editAd" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAd" prefHeight="35.0" prefWidth="100.0" text="حذف" />
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Tourist">
+                        <Tab fx:id="agentTab" text="الموظفين">
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <TableView fx:id="touristTable" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="agentSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="agentSearchText" onKeyPressed="#searchAgent" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="agentTable" prefHeight="506.0" prefWidth="907.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="14.0">
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
                                        <children>
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshTourist" prefHeight="35.0" prefWidth="100.0" text="Refresh" />
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteTourist" prefHeight="35.0" prefWidth="100.0" text="Delete Tourist" />
-                                          <Button mnemonicParsing="false" onAction="#editTourist" prefHeight="35.0" prefWidth="100.0" text="Edit Tourist" />
-                                          <Button mnemonicParsing="false" onAction="#addTourist" prefHeight="35.0" prefWidth="100.0" text="Add Tourist" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshAgent" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addAgent" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editAgent" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAgent" prefHeight="35.0" prefWidth="100.0" text="حذف" />
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Guide">
+                        <Tab fx:id="touristTab" text="السياح">
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <TableView fx:id="guideTable" AnchorPane.bottomAnchor="150.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="touristSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="touristSearchText" onKeyPressed="#searchTourist" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="touristTable" prefHeight="505.0" prefWidth="907.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="14.0">
+                                    <HBox alignment="BOTTOM_RIGHT" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
                                        <children>
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshGuide" prefHeight="35.0" prefWidth="100.0" text="Refresh" />
-                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteGuide" prefHeight="35.0" prefWidth="100.0" text="Delete Guide" />
-                                          <Button mnemonicParsing="false" onAction="#editGuide" prefHeight="35.0" prefWidth="100.0" text="Edit Guide" />
-                                          <Button mnemonicParsing="false" onAction="#addGuide" prefHeight="35.0" prefWidth="100.0" text="Add Guide" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshTourist" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addTourist" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editTourist" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteTourist" prefHeight="35.0" prefWidth="100.0" text="حذف" />
                                        </children>
                                     </HBox>
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                        <Tab text="Travel">
+                        <Tab fx:id="guideTab" text="المرشدين">
                            <content>
                               <AnchorPane>
                                  <children>
-                                    <TableView fx:id="travelTable" prefHeight="586.0" prefWidth="758.0" AnchorPane.bottomAnchor="-2.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="guideSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="guideSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="guideTable" editable="true" layoutX="333.0" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshGuide" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addGuide" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editGuide" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteGuide" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="travelTab" text="الرحلات">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="travelSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="travelSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="travelTable" prefHeight="586.0" prefWidth="758.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshTravel" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addTravel" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editTravel" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="340.0" layoutY="10.0" mnemonicParsing="false" onAction="#RegTravel" prefHeight="35.0" prefWidth="100.0" text="التسجيل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteTravel" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="transportTab" text="وسائل النقل">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="transportSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="transportSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="transportTable" prefHeight="505.0" prefWidth="907.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshTransport" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addTransport" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editTransport" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteTransport" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="placeTab" text="المزارات">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="placeSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="placeSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="placeTable" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshPlace" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addPlace" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editPlace" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deletePlace" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="hostelTab" text="أماكن الإقامة">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="hostelSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="hostelSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="hostelTable" prefHeight="506.0" prefWidth="907.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshHostel" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addHostel" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editHostel" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteHostel" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="partnerTab" text="الشركاء">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="partnerSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="partnerSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="partnerTable" editable="true" layoutX="333.0" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshPartner" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addPartner" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editPartner" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deletePartner" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="transportServiceTab" text="خدمة النقل">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="transportServiceSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="transportServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="transportServiceTable" editable="true" layoutX="333.0" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshTransportService" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addTransportService" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editTransportService" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteTransportService" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="hostelServiceTab" text="خدمة الإقامة">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="hostelServiceSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="hostelServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="hostelServiceTable" editable="true" layoutX="333.0" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshHostelService" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addHostelService" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editHostelService" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteHostelService" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="travelReportTab" text="تقرير الرحلات">
+                           <content>
+                              <ScrollPane>
+                                <content>
+                                  <AnchorPane fx:id="travelReportPane" style="-fx-background-color: #ffffff;">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text=" تقرير الرحلات " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="1.0">
+                                             <font>
+                                                <Font name="Courier New Bold" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children></AnchorPane>
+                                </content>
+                              </ScrollPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="adServiceTab" text="خدمة الدعاية">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <HBox prefHeight="31.0" prefWidth="524.0" AnchorPane.rightAnchor="1.0" AnchorPane.topAnchor="1.5">
+                                       <children>
+                                          <ComboBox fx:id="adServiceSearchComboBox" prefHeight="25.0" prefWidth="193.0">
+                                             <HBox.margin>
+                                                <Insets right="3.0" />
+                                             </HBox.margin>
+                                          </ComboBox>
+                                          <TextField fx:id="adServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                             <HBox.margin>
+                                                <Insets left="3.0" right="3.0" />
+                                             </HBox.margin>
+                                          </TextField>
+                                       </children>
+                                       <padding>
+                                          <Insets left="1.0" right="5.0" />
+                                       </padding>
+                                    </HBox>
+                                    <TableView fx:id="adServiceTable" editable="true" layoutX="333.0" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="61.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="34.0">
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
+                                    </TableView>
+                                    <HBox layoutX="314.0" layoutY="479.0" prefHeight="35.0" prefWidth="430.0" spacing="10.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0">
+                                       <children>
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshAdService" prefHeight="35.0" prefWidth="100.0" text="تحديث" />
+                                          <Button mnemonicParsing="false" onAction="#addAdService" prefHeight="35.0" prefWidth="100.0" text="جديد" />
+                                          <Button mnemonicParsing="false" onAction="#editAdService" prefHeight="35.0" prefWidth="100.0" text="تعديل" />
+                                          <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteAdService" prefHeight="35.0" prefWidth="100.0" text="حذف" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="aboutTab" text="حول البرنامج">
+                           <content>
+                              <ScrollPane>
+                                 <content>
+                                    <AnchorPane fx:id="aboutPane" style="-fx-background-color: #ffffff;">
+                                       <children>
+                                          <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="27.0" prefWidth="146.0" style="-fx-background-color: #7697a7;" text=" حول البرنامج " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="950.0" AnchorPane.topAnchor="1.0">
+                                             <font>
+                                                <Font name="Courier New Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                 </content>
+                              </ScrollPane>
+                           </content>
+                        </Tab>
+                        <Tab fx:id="registrationTab" text="التسجيل">
+                           <content>
+                              <AnchorPane style="-fx-background-color: #ffffff;">
+                                 <children>
+                                    <AnchorPane fx:id="registrationPane" maxHeight="-Infinity" prefHeight="244.0" prefWidth="909.0" AnchorPane.bottomAnchor="323.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0" />
+                                    <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="27.0" prefWidth="346.0" style="-fx-background-color: #7697a7;" text=" التسجيل في رحلة " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                       <font>
+                                          <Font name="Courier New Bold" size="18.0" />
+                                       </font>
+                                    </Label>
+                                    <TabPane fx:id="registrationTabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+                                       <tabs>
+                                          <Tab fx:id="regTouristTab" text="تسجيل السياح">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regTouristTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegTourist" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegTourist" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegTourist" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="regPlaceTab" text="تسجيل المزارات">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regPlaceTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegPlace" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegPlace" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegPlace" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="regGuideTab" text="تسجيل المرشدين">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regGuideTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegGuide" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegGuide" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegGuide" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="regTransportTab" text="تسجيل وسائل النقل">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regTransportTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegTransport" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegTransport" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegTransport" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="regHostelTab" text="تسجيل أماكن الإقامة">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regHostelTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegHostel" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegHostel" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegHostel" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                          <Tab fx:id="regcampaignTab" closable="false" text="الحملات الإعلانية">
+                                             <content>
+                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                   <children>
+                                                      <TableView fx:id="regCampaignTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <columnResizePolicy>
+                                                            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                                         </columnResizePolicy>
+                                                      </TableView>
+                                                      <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
+                                                         <children>
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegCampaign" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
+                                                            <Button mnemonicParsing="false" onAction="#addRegCampaign" prefHeight="20.0" prefWidth="80.0" text="إضافة" />
+                                                            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegCampaign" prefHeight="20.0" prefWidth="80.0" text="حذف" />
+                                                         </children>
+                                                      </HBox>
+                                                   </children>
+                                                </AnchorPane>
+                                             </content>
+                                          </Tab>
+                                       </tabs>
+                                    </TabPane>
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
                      </tabs>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
                   </TabPane>
                </children>
             </AnchorPane>
         </content>
       </ScrollPane>
    </center>
+   <top>
+      <MenuBar fx:id="menuBar" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" text="مستخدم">
+               <items>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#close" text="خروج" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الرحلات">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showScheduleMenu" text="الرحلات الحالية" />
+                  <MenuItem mnemonicParsing="false" onAction="#showTravelMenu" text="كل الرحلات" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="السياح">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showTouristlMenu" text="عرض السياح" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="المزارات السياحية">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showPlaceMenu" text="عرض المزارات السياحية" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="وسائل النقل">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showTransportMenu" text="عرض وسائل النقل" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="أماكن الإقامة">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showHostelMenu" text="أماكن الإقامة" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="مقدمي الخدمة">
+               <items>
+                  <Menu mnemonicParsing="false" text="عرض مقدمي الخدمة">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showTransportServiceMenu" text="خدمات النقل" />
+                        <MenuItem mnemonicParsing="false" onAction="#showHostelServiceMenu" text="خدمات الإقامة" />
+                        <MenuItem mnemonicParsing="false" onAction="#showAdServiceMenu" text="خدمات الدعاية" />
+                     </items>
+                  </Menu>
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الشركاء">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showPartnerMenu" text="عرض الشركاء" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="المرشدين">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showGuideMenu" text="عرض المرشدين" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الإعلانات">
+               <items>
+                  <MenuItem disable="true" mnemonicParsing="false" text="جدول الإعلانات" />
+                  <MenuItem mnemonicParsing="false" onAction="#showAdMenu" text="عرض الإعلانات" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="الموظفين">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showAgentMenu" text="عرض الموظفين" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="التقارير">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showTravelReport" text="تقرير الرحلات" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="مساعدة" visible="false">
+              <items>
+                  <MenuItem mnemonicParsing="false" onAction="#showAboutMenu" text="حول البرنامج" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
 </BorderPane>

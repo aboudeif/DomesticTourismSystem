@@ -21,8 +21,7 @@ public class GuideWindowController implements Initializable {
     private boolean isEditOp;
     private Guide  guide;
 
-    @FXML
-    private TextField specialtyField;
+    
 
     @FXML
     private ComboBox<String> cityComboBox;
@@ -56,6 +55,8 @@ public class GuideWindowController implements Initializable {
 
     @FXML
     private TextField nidField;
+    @FXML
+    private ComboBox<String> specialtyComboBox;
 
     @FXML
     void checkBirthDateConstraint(ActionEvent event) {
@@ -71,20 +72,24 @@ public class GuideWindowController implements Initializable {
     public void setEditOp(boolean isEditOp) {
         this.isEditOp = isEditOp;
         if(isEditOp)
-            this.titleLabel.setText("Edit Guide");
+            this.titleLabel.setText("تعديل مرشد");
         else
-            this.titleLabel.setText("Add Guide");
+            this.titleLabel.setText("مرشد جديد");
     }
 
     public Guide getGuide() {
         return guide;
     }
 
-    public void setGuide(Guide guide) {
+    public void setGuide(Guide guide) throws Exception {
         this.guide = guide;
 
-        if(guide.getGender().equals("Female"))
-            this.genderComboBox.setValue("Female");
+        if(guide.getGender().equals("أنثي"))
+            this.genderComboBox.setValue("أنثي");
+        if(guide.getGender().equals("ذكر"))
+            this.genderComboBox.setValue("ذكر");
+        
+             
         
         // String cityName = "";
         // try {
@@ -100,27 +105,28 @@ public class GuideWindowController implements Initializable {
         this.emailField.setText(guide.getEmail());
         this.cityComboBox.setValue(guide.getCity());
         this.localAddressField.setText(guide.getLocalAddress());
-        this.specialtyField.setText(guide.getSpecialty());
+        this.specialtyComboBox.setValue(guide.getSpecialty());
         this.rateField.setText(Double.toString(guide.getRate()));
         this.idleCheckBox.setSelected(guide.isIdle());
     }
 
     @FXML
-    void acceptOperation(ActionEvent event) {
+    void acceptOperation(ActionEvent event) throws Exception {
         if(isEditOp)
             editGuideOperation(event);
         else
             addGuideOperation(event);
     
         MainWindowController.getInstance().refreshGuideTableView();
-        
         Stage window = (Stage)(((Node)event.getSource()).getScene().getWindow());
+        window.setResizable(false);
         window.close();
     }
 
     @FXML
     void cancleOperation(ActionEvent event) {
         Stage window = (Stage)(((Node)event.getSource()).getScene().getWindow());
+        window.setResizable(false);
         window.close();
     }
 
@@ -176,14 +182,23 @@ public class GuideWindowController implements Initializable {
             }
         });
 
-        this.specialtyField.textProperty().addListener(new ChangeListener<String>(){
+       /* this.specialtyField.textProperty().addListener(new ChangeListener<String>(){
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue.length() > 15) {
                     specialtyField.setText(oldValue);
                 }
             }
-        });
+        });*/
+        try {
+            
+            List<String> specialtyList = DBQuery.getSpecialtyData();
+            for (String specialty : specialtyList)
+                specialtyComboBox.getItems().add(specialty);
+            specialtyComboBox.getSelectionModel().select(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         this.rateField.textProperty().addListener(new ChangeListener<String>(){
             @Override
@@ -195,9 +210,9 @@ public class GuideWindowController implements Initializable {
         });
 
         // Populate UI
-        genderComboBox.getItems().add("Male");        
-        genderComboBox.getItems().add("Female");
-        genderComboBox.setValue("Male");
+        genderComboBox.getItems().add("ذكر");        
+        genderComboBox.getItems().add("أنثي");
+        genderComboBox.setValue("ذكر");
 
         try{
             List<String> cityList = DBQuery.getCityData();
@@ -210,7 +225,7 @@ public class GuideWindowController implements Initializable {
         
     }
 
-    private void editGuideOperation(Event event){
+    private void editGuideOperation(Event event) throws Exception{
         // int cityID = -1;
         // try{
         //     cityID = DBQuery.getCityID(this.cityComboBox.getValue());
@@ -226,9 +241,10 @@ public class GuideWindowController implements Initializable {
         this.guide.setEmail(this.emailField.getText());
         this.guide.setCity(this.cityComboBox.getValue());
         this.guide.setLocalAddress(this.localAddressField.getText());
-        this.guide.setSpecialty(this.specialtyField.getText());
+        this.guide.setSpecialty(this.specialtyComboBox.getValue());
         this.guide.setRate(Double.parseDouble(this.rateField.getText()));
         this.guide.setIdle(this.idleCheckBox.isSelected());
+        
 
         try {
             DBQuery.editGuide(this.guide);
@@ -237,7 +253,7 @@ public class GuideWindowController implements Initializable {
         }
     }
 
-    private void addGuideOperation(Event event){
+    private void addGuideOperation(Event event) throws Exception{
         this.guide.setName(this.nameField.getText());
         this.guide.setNid(this.nidField.getText());
         this.guide.setGender(this.genderComboBox.getValue());
@@ -254,9 +270,10 @@ public class GuideWindowController implements Initializable {
 
         this.guide.setCity(this.cityComboBox.getValue());
         this.guide.setLocalAddress(this.localAddressField.getText());
-        this.guide.setSpecialty(this.specialtyField.getText());
+        this.guide.setSpecialty(this.specialtyComboBox.getValue());
         this.guide.setRate(Double.parseDouble(this.rateField.getText()));
         this.guide.setIdle(this.idleCheckBox.isSelected());
+        
 
         try {
             DBQuery.addGuide(this.guide);

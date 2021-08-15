@@ -12,7 +12,7 @@ public abstract class Person {
     private String city;
     private String localAddress;
     private Date createDate;
-    private boolean idle;
+    private String idle;
     
     public Person(){
     }
@@ -33,12 +33,20 @@ public abstract class Person {
         this.city = city;
     }
 
-    public boolean isIdle() {
+    public String getIdle() {
         return idle;
+   }
+    
+
+    public boolean isIdle() {  
+        return (!"نشط".equals(idle));
     }
 
     public void setIdle(boolean idle) {
-        this.idle = idle;
+         if(!idle)
+            this.idle = "نشط";
+        else
+            this.idle = "معطل";
     }
 
     public Date getCreateDate() {
@@ -114,4 +122,5 @@ public abstract class Person {
         this.id = id;
     }
     
+   
 }
