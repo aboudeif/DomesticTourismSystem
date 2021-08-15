@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -252,6 +253,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -266,6 +269,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -304,6 +309,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setResizable(false);
             stage.showAndWait();
         }catch(Exception e){}
@@ -325,6 +332,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setScene(scene);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setResizable(false);
             stage.showAndWait();
         }catch(Exception e){
@@ -370,6 +379,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -384,6 +395,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -423,6 +436,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -437,6 +452,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -475,6 +492,8 @@ public class MainWindowController implements Initializable {
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
             stage.showAndWait();
         }catch(Exception e){
@@ -518,6 +537,8 @@ public class MainWindowController implements Initializable {
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setScene(scene);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.showAndWait();
         }catch(Exception e){
         }
@@ -2086,6 +2107,8 @@ void initPartnerTableView(){
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
             stage.setScene(scene);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.showAndWait();
         }catch(Exception e){
         }
@@ -2119,7 +2142,10 @@ void initPartnerTableView(){
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
             stage.setScene(scene);
+            
             stage.showAndWait();
         }catch(Exception e){
         }
