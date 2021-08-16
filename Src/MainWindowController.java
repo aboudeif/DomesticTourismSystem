@@ -3,7 +3,9 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -154,8 +156,6 @@ public class MainWindowController implements Initializable {
     @FXML
     private AnchorPane registrationPane;
     @FXML
-    private TabPane registrationTabPane;
-    @FXML
     private Tab regTouristTab;
     @FXML
     private TableView<RegTourist> regTouristTable;
@@ -183,6 +183,10 @@ public class MainWindowController implements Initializable {
     private TableView<Campaign> regCampaignTable;
     @FXML
     private Tab adServiceTab;
+    @FXML
+    private TextField registerationSearchText;
+    @FXML
+    private TabPane registerationTabPane;
 
  @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -573,6 +577,27 @@ public class MainWindowController implements Initializable {
         travelColumn.setCellValueFactory(new PropertyValueFactory<>("travel"));
         regTouristTable.getColumns().add(travelColumn);
     }
+   
+   void refreshRegTouristTableView(Travel travel){
+        // clear all items
+        regTouristTable.getItems().clear();
+
+        List<RegTourist> regTouristList = null;
+        try{
+            travel = DBQuery.getTravel(travel.getId());
+            regTouristList = travel.getRegTourist() ;
+            List<Integer> trvIdlList = new ArrayList<>();
+        trvIdlList.add(travel.getId());
+        List<TrvReport> trvReportList = DBQuery.getTrvReportData(trvIdlList);
+        generateTravelReport(trvReportList, registrationPane);
+        }catch(Exception e){
+        }
+        if(regTouristList != null)
+            for (RegTourist reg : regTouristList)
+                regTouristTable.getItems().add(reg);
+        
+    }
+   
         void initRegPlaceTableView(){
         regPlaceTable.getColumns().clear();
         
@@ -771,12 +796,28 @@ public class MainWindowController implements Initializable {
         regTransportTable.getColumns().clear();
         
         TableColumn<RegTransport, Integer> idColumn = new TableColumn<>("رقم وسيلة النقل");
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("transport"));
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("transportId"));
         regTransportTable.getColumns().add(idColumn);
         
-        TableColumn<RegTransport, Integer> travelColumn = new TableColumn<>("رقم الرحلة");
-        travelColumn.setCellValueFactory(new PropertyValueFactory<>("travel"));
-        regTransportTable.getColumns().add(travelColumn);
+        TableColumn<RegTransport, String> typeColumn = new TableColumn<>("النوع");
+        typeColumn.setCellValueFactory(new PropertyValueFactory<>("transportType"));
+        regTransportTable.getColumns().add(typeColumn);
+        
+        TableColumn<RegTransport, String> panelNoColumn = new TableColumn<>("رقم اللوحة");
+        panelNoColumn.setCellValueFactory(new PropertyValueFactory<>("transportPanelNo"));
+        regTransportTable.getColumns().add(panelNoColumn);
+        
+        TableColumn<RegTransport, String> modelColumn = new TableColumn<>("الموديل");
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("transportModel"));
+        regTransportTable.getColumns().add(modelColumn);
+        
+        TableColumn<RegTransport, Integer> capacityColumn = new TableColumn<>("السعة");
+        capacityColumn.setCellValueFactory(new PropertyValueFactory<>("transportCapacity"));
+        regTransportTable.getColumns().add(capacityColumn);
+        
+        TableColumn<RegTransport, String> cityColumn = new TableColumn<>("المدينة");
+        cityColumn.setCellValueFactory(new PropertyValueFactory<>("transportCity"));
+        regTransportTable.getColumns().add(cityColumn);
        
         TableColumn<RegTransport, Integer> daysNumColumn = new TableColumn<>("عدد الأيام");
         daysNumColumn.setCellValueFactory(new PropertyValueFactory<>("daysNum"));
@@ -789,6 +830,11 @@ public class MainWindowController implements Initializable {
         TableColumn<RegTransport, Double> totalCostColumn = new TableColumn<>("تكلفة الإشتراك");
         totalCostColumn.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
         regTransportTable.getColumns().add(totalCostColumn);
+        
+        
+        TableColumn<RegTransport, String> transportServiceColumn = new TableColumn<>("خدمة النقل");
+        transportServiceColumn.setCellValueFactory(new PropertyValueFactory<>("transportService"));
+        regTransportTable.getColumns().add(transportServiceColumn);
         
         refreshRegTransportTableView(Travel.getSelectedTravel());
         
@@ -811,25 +857,7 @@ public class MainWindowController implements Initializable {
 
         
 
-    void refreshRegTouristTableView(Travel travel){
-        // clear all items
-        regTouristTable.getItems().clear();
-
-        List<RegTourist> regTouristList = null;
-        try{
-            travel = DBQuery.getTravel(travel.getId());
-            regTouristList = travel.getRegTourist() ;
-            List<Integer> trvIdlList = new ArrayList<>();
-        trvIdlList.add(travel.getId());
-        List<TrvReport> trvReportList = DBQuery.getTrvReportData(trvIdlList);
-        generateTravelReport(trvReportList, registrationPane);
-        }catch(Exception e){
-        }
-        if(regTouristList != null)
-            for (RegTourist reg : regTouristList)
-                regTouristTable.getItems().add(reg);
-        
-    }
+    
     // ------------- Internal Methods ------------- //
 
     void initAgentTableView(){
@@ -1836,7 +1864,7 @@ void initPartnerTableView(){
         v[2].getChildren().add(makeLabel( ""));
         v[3].getChildren().add(makeLabel( ""));
         
-        v[0].getChildren().add(makeLabel( "--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
+        v[0].getChildren().add(makeLabel( "---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"));
         v[1].getChildren().add(makeLabel( ""));
         v[2].getChildren().add(makeLabel( ""));
         v[3].getChildren().add(makeLabel( ""));
@@ -2181,10 +2209,32 @@ void initPartnerTableView(){
 
     @FXML
     private void addRegTransport(ActionEvent event) {
+         try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RegTransportWindow.fxml"));
+            Parent root = loader.load();
+            RegTransportWindowController controller = loader.getController();
+            
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.showAndWait();
+        }catch(Exception e){
+        }
     }
 
     @FXML
     private void deleteRegTransport(ActionEvent event) {
+         RegTransport regTransport = regTransportTable.getSelectionModel().getSelectedItem();
+        try {
+            DBQuery.deleteRegTransport(regTransport);
+        } catch (Exception e) {
+        }
+        refreshRegPlaceTableView(Travel.getSelectedTravel());
     }
 
     @FXML
@@ -2230,6 +2280,78 @@ void initPartnerTableView(){
 
     @FXML
     private void deleteRegCampaign(ActionEvent event) {
+    }
+
+    @FXML
+    private void searchAd(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchGuide(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchTravel(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchTransport(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchHostel(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchPartner(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchTransportService(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchHostelService(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchAdService(KeyEvent event) {
+    }
+
+    @FXML
+    private void searchRegisteration(KeyEvent event) {
+        //if (registerationSearchText.getText()== null){
+          //  refreshRegTouristTableView(Travel.getSelectedTravel());
+        //} else {
+      
+       /* TabPane tab = new TabPane();
+        String id;
+            id = registerationTabPane.getSelectionModel().getSelectedItem().getId();
+        *///switch (id){
+        //    case "regTouristTab": 
+            //regTouristTable.getItems().clear();
+       // }
+        
+        
+     Optional<RegTourist> observableList = regTouristTable.getItems().stream().filter(item -> item.getTouristName().contains(registerationSearchText.getText())).findAny();
+     //Optional<RegTourist> observableList = regTouristTable.getItems().stream().filter(item -> item.getTouristName().contains(registerationSearchText.getText())).findAny();
+     regTouristTable.getSelectionModel().select(observableList.orElse(null));
+//.ifPresent(item -> {
+        //regTouristTable.getSelectionModel().select(item);
+       // regTouristTable.scrollTo(item);
+       //regTouristTable.getItems().containsAll(registerationSearchText.getText());
+    //});*/
+        /*
+       
+        List<Agent> angetList = null;
+        try{
+            angetList = DBQuery.getResAgent(DBQuery.getSearch("Agent",toArEn(agentSearchComboBox.getValue()), agentSearchText.getText()));
+        }catch(Exception e){
+        }
+        if(angetList != null)
+            for (Agent agent : angetList)
+                agentTable.getItems().add(agent);
+        }*/
     }
    
 

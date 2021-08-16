@@ -212,7 +212,7 @@ public class DBQuery {
         
             while(res.next()){
             RegTransport regTransport = new RegTransport();
-            regTransport.setTransport(res.getInt("trsID"));
+            regTransport.setTransport(getTransport(res.getInt("trsID")));
             regTransport.setTravel(res.getInt("trvID"));
             regTransport.setDaysNum(res.getInt("daysNum"));
             regTransport.setRegDate(res.getDate("regDate"));
@@ -759,7 +759,7 @@ public class DBQuery {
     
     public static void addRegTransport(RegTransport regTransport) throws Exception{
        
-        String sqlString = "INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost) VALUES ("+regTransport.getTravel()+","+regTransport.getTransport()+","+regTransport.getDaysNum()+","+regTransport.getDaysNum()+"*(SELECT cost FROM Transport WHERE id = "+regTransport.getTransport()+"));";
+        String sqlString = "INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost) VALUES ("+regTransport.getTravel()+","+regTransport.getTransportId()+","+regTransport.getDaysNum()+","+regTransport.getDaysNum()+"*(SELECT cost FROM Transport WHERE id = "+regTransport.getTransport()+"));";
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
     

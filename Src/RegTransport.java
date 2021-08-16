@@ -3,7 +3,7 @@ import java.sql.Date;
 
 
 public class RegTransport {
-    private int transport;
+    private Transport transport;
     private int travel;
     private int daysNum;
     private Date regDate;
@@ -12,11 +12,38 @@ public class RegTransport {
     public RegTransport() {
     }
 
-    public int getTransport() {
+    public int getTransportId() {
+        return transport.getId();
+    }
+
+    public String getTransportType() {
+        return transport.getType();
+    }
+    public String getTransportPanelNo() {
+        return transport.getPanelNo();
+    }
+
+    public String getTransportModel() {
+        return transport.getModel();
+    }
+    
+   public int getTransportCapacity() {
+        return transport.getCapacity();
+    }
+   
+    public String getTransportCity() {
+        return transport.getCity();
+    }
+    
+    public String getTransportService() {
+        return transport.getTransportService();
+    }
+    
+    public Transport getTransport() {
         return transport;
     }
 
-    public void setTransport(int transport) {
+    public void setTransport(Transport transport) {
         this.transport = transport;
     }
 

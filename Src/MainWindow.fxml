@@ -61,7 +61,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="adSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="adSearchText" onKeyPressed="#searchAd" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -175,7 +175,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="guideSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="guideSearchText" onKeyPressed="#searchGuide" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -213,7 +213,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="travelSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="travelSearchText" onKeyPressed="#searchTravel" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -252,7 +252,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="transportSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="transportSearchText" onKeyPressed="#searchTransport" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -328,7 +328,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="hostelSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="hostelSearchText" onKeyPressed="#searchHostel" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -366,7 +366,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="partnerSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="partnerSearchText" onKeyPressed="#searchPartner" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -404,7 +404,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="transportServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="transportServiceSearchText" onKeyPressed="#searchTransportService" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -442,7 +442,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="hostelServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="hostelServiceSearchText" onKeyPressed="#searchHostelService" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -496,7 +496,7 @@
                                                 <Insets right="3.0" />
                                              </HBox.margin>
                                           </ComboBox>
-                                          <TextField fx:id="adServiceSearchText" onKeyPressed="#searchPlace" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
+                                          <TextField fx:id="adServiceSearchText" onKeyPressed="#searchAdService" prefHeight="31.0" prefWidth="321.0" promptText="أكتب هنا للبحث">
                                              <HBox.margin>
                                                 <Insets left="3.0" right="3.0" />
                                              </HBox.margin>
@@ -544,23 +544,22 @@
                            <content>
                               <AnchorPane style="-fx-background-color: #ffffff;">
                                  <children>
-                                    <AnchorPane fx:id="registrationPane" maxHeight="-Infinity" prefHeight="244.0" prefWidth="909.0" AnchorPane.bottomAnchor="323.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-2.0" AnchorPane.topAnchor="0.0" />
+                                    <AnchorPane fx:id="registrationPane" maxHeight="-Infinity" AnchorPane.bottomAnchor="323.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <Label alignment="CENTER" layoutX="1.0" layoutY="1.0" prefHeight="27.0" prefWidth="346.0" style="-fx-background-color: #7697a7;" text=" التسجيل في رحلة " textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
                                        <font>
                                           <Font name="Courier New Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TabPane fx:id="registrationTabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
+                                    <TabPane fx:id="registerationTabPane" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="250.0">
                                        <tabs>
                                           <Tab fx:id="regTouristTab" text="تسجيل السياح">
                                              <content>
-                                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                                <AnchorPane prefHeight="180.0" prefWidth="200.0">
                                                    <children>
                                                       <TableView fx:id="regTouristTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegTourist" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
@@ -568,6 +567,7 @@
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteRegTourist" prefHeight="20.0" prefWidth="80.0" text="حذف" />
                                                          </children>
                                                       </HBox>
+                                                      <TextField fx:id="registerationSearchText" layoutX="713.0" layoutY="247.0" onKeyTyped="#searchRegisteration" prefHeight="31.0" prefWidth="162.0" promptText="أكتب هنا للبحث" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="4.0" />
                                                    </children>
                                                 </AnchorPane>
                                              </content>
@@ -579,8 +579,7 @@
                                                       <TableView fx:id="regPlaceTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegPlace" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
@@ -599,8 +598,7 @@
                                                       <TableView fx:id="regGuideTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegGuide" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
@@ -619,8 +617,7 @@
                                                       <TableView fx:id="regTransportTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegTransport" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
@@ -639,8 +636,7 @@
                                                       <TableView fx:id="regHostelTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegHostel" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
@@ -659,8 +655,7 @@
                                                       <TableView fx:id="regCampaignTable" editable="true" prefHeight="506.0" prefWidth="574.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <columnResizePolicy>
                                                             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                                         </columnResizePolicy>
-                                                      </TableView>
+                                                         </columnResizePolicy></TableView>
                                                       <HBox prefHeight="35.0" prefWidth="267.0" spacing="10.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="14.0">
                                                          <children>
                                                             <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#refreshRegCampaign" prefHeight="20.0" prefWidth="80.0" text="تحديث" />
