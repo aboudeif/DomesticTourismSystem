@@ -14,53 +14,43 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class TouristWindowController implements Initializable {
     private boolean isEditOp;
     private Tourist  tourist;
-
     @FXML
     private ComboBox<String> cityComboBox;
-
     @FXML
     private TextField mobileField;
-
     @FXML
     private CheckBox idleCheckBox;
 
     @FXML
     private Label titleLabel;
-
     @FXML
     private ComboBox<String> genderComboBox;
-
     @FXML
     private TextField localAddressField;
-
     @FXML
     private TextField nameField;
-
     @FXML
     private DatePicker datePicker;
-
     @FXML
     private TextField emailField;
-
     @FXML
     private TextField nidField;
-
     @FXML
     private ComboBox<String> partnerComboBox;
-
     @FXML
     private TextField infoField;
-
     @FXML
     private TextField balanceField;
-
     @FXML
+    
+
     void checkBirthDateConstraint(ActionEvent event) {
         LocalDate date = this.datePicker.getValue();
         if(LocalDate.now().compareTo(date) < 0) date = LocalDate.now();
@@ -74,9 +64,9 @@ public class TouristWindowController implements Initializable {
     public void setEditOp(boolean isEditOp) {
         this.isEditOp = isEditOp;
         if(isEditOp)
-            this.titleLabel.setText("Edit Tourist");
+            this.titleLabel.setText("تعديل سائح");
         else
-            this.titleLabel.setText("Add Tourist");
+            this.titleLabel.setText("سائح جديد");
     }
 
     public Tourist getTourist() {
@@ -86,8 +76,8 @@ public class TouristWindowController implements Initializable {
     public void setTourist(Tourist tourist) {
         this.tourist = tourist;
 
-        if(tourist.getGender().equals("Female"))
-            this.genderComboBox.setValue("Female");
+        if(tourist.getGender().equals("أنثي"))
+            this.genderComboBox.setValue("أنثي");
         
         // String partnerName = "";
         // try {
@@ -120,6 +110,7 @@ public class TouristWindowController implements Initializable {
         
         Stage window = (Stage)(((Node)event.getSource()).getScene().getWindow());
         window.close();
+        //clear();
     }
 
     @FXML
@@ -190,9 +181,9 @@ public class TouristWindowController implements Initializable {
         });
 
         // Populate UI
-        genderComboBox.getItems().add("Male");        
-        genderComboBox.getItems().add("Female");
-        genderComboBox.setValue("Male");
+        genderComboBox.getItems().add("ذكر");        
+        genderComboBox.getItems().add("أنثي");
+        genderComboBox.setValue("ذكر");
 
         try{
             List<String> cityList = DBQuery.getCityData();
@@ -205,7 +196,7 @@ public class TouristWindowController implements Initializable {
 
         try {
             partnerComboBox.getItems().add("");
-            List<String> partnerList = DBQuery.getPartnerData();
+            List<String> partnerList = DBQuery.getSPList("prt");
             for (String partner : partnerList)
                 partnerComboBox.getItems().add(partner);
             partnerComboBox.getSelectionModel().select(0);
@@ -253,12 +244,6 @@ public class TouristWindowController implements Initializable {
         this.tourist.setCity(this.cityComboBox.getValue());
         this.tourist.setLocalAddress(this.localAddressField.getText());
         this.tourist.setIdle(this.idleCheckBox.isSelected());
-        // int partnerID = -1;
-        // try {
-        //     partnerID = DBQuery.getPartnerID(this.partnerComboBox.getValue());
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
         this.tourist.setPartner(this.partnerComboBox.getValue());
         this.tourist.setInfo(this.infoField.getText());
         this.tourist.setBalance(Double.parseDouble(this.balanceField.getText()));
@@ -269,5 +254,5 @@ public class TouristWindowController implements Initializable {
             e.printStackTrace();
         }
     }
-
+   
 }

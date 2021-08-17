@@ -1,4 +1,4 @@
-DataBaseInstance,HAZEM
+DataBaseInstance,MACHINE
 DataBaseName,DTSDB
-DataBaseAccount,sa
-DataBasePassword,123
+DataBaseAccount,mstrusr
+DataBasePassword,12345678

@@ -1,67 +1,29 @@
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class ServiceProvider {
+public abstract class ServiceProvider {
     private int id;
     private String cls;
     private String name;
     private String crn;
     private String email;
-    private int cityID;
+    private String city;
     private String localAddress;
     private String type;
     private Date createDate;
-    private boolean idle;
-    private double discount;
+    private String idle;
+    
 
     public ServiceProvider(){
-        id = 0;
-        cls = "";
-        name = "";
-        crn = "";
-        email = "";
-        cityID = 0;
-        localAddress = "";
-        type = "";
-        createDate = Date.valueOf(LocalDate.now());
-        idle = false;
-        discount = 0.0;
+        
     }
 
-    public ServiceProvider(int id, String cls, String name, String crn, String email, int cityID,
-     String localAddress, String type, Date createDate, boolean idle, double discount){
-         this.setId(id);
-         this.setCls(cls);
-         this.setName(name);
-         this.setCrn(crn);
-         this.setEmail(email);
-         this.setCityID(cityID);
-         this.setLocalAddress(localAddress);
-         this.setType(type);
-         this.setCreateDate(createDate);
-         this.setIdle(idle);
-         this.setDiscount(discount);
-     }
 
 
     public int getId() {
         return id;
     }
-    public double getDiscount() {
-        return discount;
-    }
-    public void setDiscount(double discount) {
-        if((discount >= 0) || (discount <= 1.0))
-            this.discount = discount;
-        else
-            this.discount = 0.0;
-    }
-    public boolean isIdle() {
-        return idle;
-    }
-    public void setIdle(boolean idle) {
-        this.idle = idle;
-    }
+
     public Date getCreateDate() {
         return createDate;
     }
@@ -80,12 +42,15 @@ public class ServiceProvider {
     public void setLocalAddress(String localAddress) {
         this.localAddress = localAddress;
     }
-    public int getCityID() {
-        return cityID;
+
+    public String getCity() {
+        return city;
     }
-    public void setCityID(int cityID) {
-        this.cityID = cityID;
+
+    public void setCity(String city) {
+        this.city = city;
     }
+   
     public String getEmail() {
         return email;
     }
@@ -113,4 +78,16 @@ public class ServiceProvider {
     public void setId(int id) {
         this.id = id;
     } 
+            public String getIdle() {
+        return idle;
+   }
+    public boolean isIdle() {
+        return (!"نشط".equals(idle));
+    }
+    public void setIdle(boolean idle) {
+         if(!idle)
+            this.idle = "نشط";
+        else
+            this.idle = "معطل";
+    }
 }

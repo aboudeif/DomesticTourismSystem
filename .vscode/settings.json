@@ -1,0 +1,16 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.base.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.controls.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.fxml.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.graphics.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.media.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.swing.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx.web.jar",
+        "D:\\Programing\\Java\\javafx-sdk-11.0.2\\lib\\javafx-swt.jar",
+        "D:\\Programing\\Java\\sqljdbc_9.2\\enu\\mssql-jdbc-9.2.1.jre11.jar"
+    ],
+    "java.debug.settings.vmArgs":
+        "--module-path D:/Programing/Java/javafx-sdk-11.0.2/lib --add-modules javafx.controls,javafx.fxml,javafx.media"
+}
