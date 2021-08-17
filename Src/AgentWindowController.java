@@ -66,14 +66,7 @@ public class AgentWindowController implements Initializable {
 
         if(agent.getGender().equals("Female"))
             this.genderComboBox.setValue("Female");
-        
-        // String cityName = "";
-        // try {
-        //     cityName = DBQuery.getCityName(agent.getCityID());
-        // } catch (Exception e) {
-        //     e.printStackTrace();
-        // }
-        
+                
         this.nameField.setText(agent.getName());
         this.nidField.setText(agent.getNid());
         this.mobileField.setText(agent.getMobile());
@@ -125,13 +118,6 @@ public class AgentWindowController implements Initializable {
     }
 
     void editAgentOperation(ActionEvent event){
-        // int cityID = -1;
-        // try{
-        //     cityID = DBQuery.getCityID(this.cityComboBox.getValue());
-        // }catch(Exception e){
-        //     e.printStackTrace();
-        // }
-
         this.agent.setName(this.nameField.getText());
         this.agent.setNid(this.nidField.getText());
         this.agent.setGender(this.genderComboBox.getValue());
