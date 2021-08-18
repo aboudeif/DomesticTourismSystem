@@ -44,6 +44,14 @@ public class Advertisement {
     public void setDesignCost(double designCost) {
         this.designCost = designCost;
     }
+    
+    public double getCost() {
+        return designCost;
+    }
+
+    public void setCost(double cost) {
+        this.designCost = cost;
+    }
 
     public Date getCreatDate() {
         return creatDate;

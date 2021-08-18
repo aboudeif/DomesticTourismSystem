@@ -8,8 +8,6 @@ public class RegTourist {
     private Date regDate;
     private double actualProfit;
 
-
-
     public Tourist getTourist() {
         return tourist;
     }
@@ -54,6 +52,5 @@ public class RegTourist {
     public void setActualProfit(double actualProfit) {
         this.actualProfit = actualProfit;
     }
-    
     
 }

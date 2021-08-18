@@ -1,6 +1,4 @@
 
-import java.util.HashMap;
-
 
 public class City {
  private int id;

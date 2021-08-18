@@ -1,5 +1,4 @@
 import java.sql.Date;
-import java.time.LocalDate;
 
 public abstract class ServiceProvider {
     private int id;
@@ -12,13 +11,19 @@ public abstract class ServiceProvider {
     private String type;
     private Date createDate;
     private String idle;
+    private String phones;
     
-
     public ServiceProvider(){
         
     }
+    
+    public String getPhones() {
+        return phones;
+    }
 
-
+    public void setPhones(String phones) {
+        this.phones = phones;
+    }
 
     public int getId() {
         return id;
@@ -78,7 +83,7 @@ public abstract class ServiceProvider {
     public void setId(int id) {
         this.id = id;
     } 
-            public String getIdle() {
+    public String getIdle() {
         return idle;
    }
     public boolean isIdle() {

@@ -1,6 +1,5 @@
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -24,7 +23,6 @@ public class RegTransportWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         initTransportTableView();
     }    
 

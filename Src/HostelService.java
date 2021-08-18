@@ -1,7 +1,6 @@
 
 import java.util.List;
 
-
 public class HostelService extends ServiceProvider {
     private List<Hostel> hostel;
 

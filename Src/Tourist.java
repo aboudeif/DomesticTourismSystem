@@ -1,4 +1,3 @@
-import java.sql.Date;
 
 public class Tourist extends Person {
     private String partner;
@@ -11,11 +10,9 @@ public class Tourist extends Person {
     }
 
     
-
     public double getBalance() {
         return balance;
     }
-
 
     public void setBalance(double balance) {
         if (balance >= 0.0)

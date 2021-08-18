@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DBQuery {
-        public static int getCityID(String city) throws Exception{
+    public static int getCityID(String city) throws Exception{
         int id = -1;
         String querey = "SELECT [id] FROM [City] WHERE [city] = '"+ city +"';";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(querey);
@@ -25,7 +25,6 @@ public class DBQuery {
         return city;
     }
     
-
     public static List<String> getCityData() throws Exception{
         List<String> cityList = new ArrayList<>();
         String querey = "SELECT DISTINCT [city] FROM [City];";
@@ -68,13 +67,15 @@ public class DBQuery {
             
         return list;
     }
+    
     public static ResultSet getSelectiveData(String tableName, String columnName, int value) throws Exception{
-         String sqlString = "SELECT * FROM ["+tableName+"] WHERE ["+columnName+"] = "+value+";";
+        String sqlString = "SELECT * FROM ["+tableName+"] WHERE ["+columnName+"] = "+value+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
         return res;
     }
-     public static ResultSet getSelectiveData(String tableName, String columnName, String value) throws Exception{
-         String sqlString = "SELECT * FROM ["+tableName+"] WHERE ["+columnName+"] = '"+value+"';";
+    
+    public static ResultSet getSelectiveData(String tableName, String columnName, String value) throws Exception{
+        String sqlString = "SELECT * FROM ["+tableName+"] WHERE ["+columnName+"] = '"+value+"';";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
         return res;
     }
@@ -82,7 +83,7 @@ public class DBQuery {
     public static List<Partner>  getResPartner(ResultSet res) throws Exception{
         List<Partner> list = new ArrayList<>();
         
-               while(res.next()){
+        while(res.next()){
             Partner partner = new Partner();
             partner.setId(res.getInt("id"));
             partner.setName(res.getString("name"));
@@ -99,13 +100,13 @@ public class DBQuery {
         }
         return list;
     }
-     public static Partner getPartner(int partID) throws Exception{
+    
+    public static Partner getPartner(int partID) throws Exception{
         Partner partner = new Partner();
         
         String sqlString = "SELECT * FROM [ServiceProvider] WHERE [class] = 'prt' AND [id] ="+partID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next()){
-            
+        if(res.next()){ 
             partner.setId(res.getInt("id"));
             partner.setName(res.getString("name"));
             partner.setCrn(res.getString("crn"));
@@ -122,10 +123,10 @@ public class DBQuery {
         return partner;
     }
      
-     public static List<Campaign> getResCampaign(ResultSet res) throws Exception{
+    public static List<Campaign> getResCampaign(ResultSet res) throws Exception{
         List<Campaign> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             Campaign campaign = new Campaign();
             campaign.setId(res.getInt("id"));
             campaign.setTravel(res.getInt("trvID"));
@@ -143,41 +144,42 @@ public class DBQuery {
         }
         return list;
     }
-     public static List<RegTourist> getResRegTourist(ResultSet res) throws Exception{
+    
+    public static List<RegTourist> getResRegTourist(ResultSet res) throws Exception{
         List<RegTourist> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             RegTourist regTourist = new RegTourist();
             regTourist.setTourist(getTourist(res.getInt("turID")));
             regTourist.setTravel(res.getInt("trvID"));
             regTourist.setRegDate(res.getDate("regDate"));
             regTourist.setActualProfit(res.getDouble("actualProfit"));
             
-            
             list.add(regTourist);
         }
         return list;
     }
-     public static List<RegGuide> getResRegGuide(ResultSet res) throws Exception{
+    
+    public static List<RegGuide> getResRegGuide(ResultSet res) throws Exception{
         List<RegGuide> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             RegGuide regGuide = new RegGuide();
             regGuide.setGuide(res.getInt("gudID"));
             regGuide.setTravel(res.getInt("trvID"));
             regGuide.setDaysNum(res.getInt("daysNum"));
             regGuide.setRegDate(res.getDate("regDate"));
             regGuide.setTotalCost(res.getDouble("totalCost"));
-           
             
             list.add(regGuide);
         }
         return list;
     }
-     public static List<RegHostel> getResRegHostel(ResultSet res) throws Exception{
+    
+    public static List<RegHostel> getResRegHostel(ResultSet res) throws Exception{
         List<RegHostel> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             RegHostel regHostel = new RegHostel();
             regHostel.setHostel(res.getInt("hstID"));
             regHostel.setTravel(res.getInt("trvID"));
@@ -185,57 +187,55 @@ public class DBQuery {
             regHostel.setNightsNum(res.getInt("nightsNum"));
             regHostel.setRegDate(res.getDate("regDate"));
             regHostel.setTotalCost(res.getDouble("totalCost"));
-           
             
             list.add(regHostel);
         }
         return list;
     }
-     public static List<RegPlace> getResRegPlace(ResultSet res) throws Exception{
+    
+    public static List<RegPlace> getResRegPlace(ResultSet res) throws Exception{
         List<RegPlace> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             RegPlace regPlace = new RegPlace();
             regPlace.setPlace(getPlace(res.getInt("plcID")));
             regPlace.setTravel(res.getInt("trvID"));
             regPlace.setRegDate(res.getDate("regDate"));
             regPlace.setTotalCost(res.getDouble("totalCost"));
-           
             
             list.add(regPlace);
         }
         return list;
     }
      
-     public static List<RegTransport> getResRegTransport(ResultSet res) throws Exception{
+    public static List<RegTransport> getResRegTransport(ResultSet res) throws Exception{
         List<RegTransport> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             RegTransport regTransport = new RegTransport();
             regTransport.setTransport(getTransport(res.getInt("trsID")));
             regTransport.setTravel(res.getInt("trvID"));
             regTransport.setDaysNum(res.getInt("daysNum"));
             regTransport.setRegDate(res.getDate("regDate"));
             regTransport.setTotalCost(res.getDouble("totalCost"));
-           
             
             list.add(regTransport);
         }
         return list;
     }
-     public static ResultSet getRegistration(String table, int trvID) throws Exception{
+    
+    public static ResultSet getRegistration(String table, int trvID) throws Exception{
         String sqlString = "SELECT * FROM "+table+" WHERE [trvID] = "+trvID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-     return res;
-     }
+        return res;
+    }
         
-     public static Campaign getCampaign(int cmpID) throws Exception{
+    public static Campaign getCampaign(int cmpID) throws Exception{
         Campaign campaign = new Campaign();
         
         String sqlString = "SELECT * FROM [Campaign] WHERE [id] = "+cmpID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-            
+        if(res.next()){
             campaign.setId(res.getInt("id"));
             campaign.setTravel(res.getInt("trvID"));
             campaign.setAdvertisement(res.getInt("adID"));
@@ -247,17 +247,16 @@ public class DBQuery {
             campaign.setRegDate(res.getDate("regDate"));
             campaign.setCost(res.getDouble("cost"));
             campaign.setIdle(res.getBoolean("idle"));
-        
+        }
         return campaign;
     }
     
-     public static List<Hostel> getResHostel(ResultSet res) throws Exception{
+    public static List<Hostel> getResHostel(ResultSet res) throws Exception{
         List<Hostel> list = new ArrayList<>();
             
-            while(res.next()){
+        while(res.next()){
             Hostel hostel = new Hostel();
             hostel.setId(res.getInt("id"));
-            
             hostel.setName(res.getString("name"));
             hostel.setType(res.getString("type"));
             hostel.setHostelService(getSPName(res.getInt("ownerID")));
@@ -273,14 +272,13 @@ public class DBQuery {
         }
         return list;
     }
-     public static Hostel getHostel(int ownerID) throws Exception{
+    
+    public static Hostel getHostel(int ownerID) throws Exception{
         Hostel hostel = new Hostel();
         
         String sqlString = "SELECT * FROM [Hostel] WHERE [id] = "+ownerID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-            
-            
+        if(res.next()){
             hostel.setId(res.getInt("id"));
             hostel.setName(res.getString("name"));
             hostel.setType(res.getString("type"));
@@ -292,15 +290,14 @@ public class DBQuery {
             hostel.setCapacity(res.getInt("capacity"));
             hostel.setHotelDegree(res.getInt("hotelDegree"));
             hostel.setCost(res.getDouble("cost"));
-        
+        }
         return hostel;
     }
      
-     public static List<Transport> getResTransport(ResultSet res) throws Exception{
+    public static List<Transport> getResTransport(ResultSet res) throws Exception{
         List<Transport> list = new ArrayList<>();
 
         while(res.next()){
-            
             Transport transport = new Transport();
             transport.setId(res.getInt("id"));
             transport.setType(res.getString("type"));
@@ -312,21 +309,18 @@ public class DBQuery {
             transport.setCity(getCityName(res.getInt("cityID")));
             transport.setCapacity(res.getInt("capacity"));
             transport.setCost(res.getDouble("cost"));
-            
 
             list.add(transport);
-            
         }
         return list;
     }
-     public static Transport getTransport(int ownerID) throws Exception{
+    
+    public static Transport getTransport(int ownerID) throws Exception{
         Transport transport = new Transport();
         
         String sqlString = "SELECT * FROM [Transport] WHERE [id] = "+ownerID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-            
-            
+        if(res.next()){
             transport.setId(res.getInt("id"));
             transport.setType(res.getString("type"));
             transport.setTransportService(getSPName(res.getInt("ownerID")));
@@ -337,12 +331,11 @@ public class DBQuery {
             transport.setCity(getCityName(res.getInt("cityID")));
             transport.setCapacity(res.getInt("capacity"));
             transport.setCost(res.getDouble("cost"));
-        
+        }
         return transport;
     }
      
     public static List<Advertisement> getResAdvertisement(ResultSet res) throws Exception{
-        
         List<Advertisement> list = new ArrayList<>();
         while(res.next()){
             Advertisement advertisement = new Advertisement();
@@ -357,27 +350,27 @@ public class DBQuery {
         }
         return list;
     }
-     public static Advertisement getAdvertisement(int adID) throws Exception{
+    
+    public static Advertisement getAdvertisement(int adID) throws Exception{
         Advertisement advertisement = new Advertisement();
         
         String sqlString = "SELECT * FROM [Advertisement] WHERE [id] = "+adID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-
+        if(res.next()){
             advertisement.setId(res.getInt("id"));
             advertisement.setAdService(getAdServiceName(res.getInt("companyID")));
             advertisement.setInfo(res.getString("info"));
             advertisement.setCreatDate(res.getDate("CREATEDate"));
             advertisement.setDesignCost(res.getDouble("designCost"));
             advertisement.setIdle(res.getBoolean("idle"));
-        
+        }
         return advertisement;
     } 
      
-     public static List<AdService> getResAdService(ResultSet res) throws Exception{
+    public static List<AdService> getResAdService(ResultSet res) throws Exception{
         List<AdService> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             AdService adService = new AdService();
             adService.setId(res.getInt("id"));
             adService.setName(res.getString("name"));
@@ -393,8 +386,8 @@ public class DBQuery {
         }
         return list;
     }
-     public static String getAdServiceName(int companyID) throws Exception{
-         
+    
+    public static String getAdServiceName(int companyID) throws Exception{
         String adService = null;
         
         String sqlString = "SELECT [name] FROM [ServiceProvider] WHERE [id] = "+companyID+";";
@@ -406,10 +399,10 @@ public class DBQuery {
         return adService;
     }
      
-     public static List<HostelService> getResHostelService(ResultSet res) throws Exception{
+    public static List<HostelService> getResHostelService(ResultSet res) throws Exception{
         List<HostelService> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             HostelService hostelService = new HostelService();
             hostelService.setId(res.getInt("id"));
             hostelService.setName(res.getString("name"));
@@ -425,13 +418,13 @@ public class DBQuery {
         }
         return list;
     }
-     public static HostelService getHostelService(int hstOwnerID) throws Exception{
+    
+    public static HostelService getHostelService(int hstOwnerID) throws Exception{
         HostelService hostelService = new HostelService();
         
         String sqlString = "SELECT * FROM [ServiceProvider] WHERE [class] = 'hst' And [id] = "+hstOwnerID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-            
+        if(res.next()){
             hostelService.setId(res.getInt("id"));
             hostelService.setName(res.getString("name"));
             hostelService.setCrn(res.getString("crn"));
@@ -442,14 +435,15 @@ public class DBQuery {
             hostelService.setCreateDate(res.getDate("CREATEDate"));
             hostelService.setIdle(res.getBoolean("idle"));
             hostelService.setHostel(getResHostel(getSelectiveData("Hostel","ownerID",res.getInt("id"))));
+        }
         
         return hostelService;
     }
      
-     public static List<TransportService> getResTransportService(ResultSet res) throws Exception{
+    public static List<TransportService> getResTransportService(ResultSet res) throws Exception{
         List<TransportService> list = new ArrayList<>();
         
-            while(res.next()){
+        while(res.next()){
             TransportService transportService = new TransportService();
             transportService.setId(res.getInt("id"));
             transportService.setName(res.getString("name"));
@@ -461,17 +455,20 @@ public class DBQuery {
             transportService.setCreateDate(res.getDate("CREATEDate"));
             transportService.setIdle(res.getBoolean("idle"));
             transportService.setTransport(getResTransport(getSelectiveData("Transport","ownerID",res.getInt("id"))));
+            transportService.setPhones(getPhone(transportService.getId()));
+            
+
             list.add(transportService);
         }
         return list;
     }
-     public static TransportService getTransportService(int trsOwnerID) throws Exception{
+    
+    public static TransportService getTransportService(int trsOwnerID) throws Exception{
         TransportService transportService = new TransportService();
         
         String sqlString = "SELECT * FROM [ServiceProvider] WHERE [class] = 'trs' And [id] = "+trsOwnerID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next())
-            
+        if(res.next()){
             transportService.setId(res.getInt("id"));
             transportService.setName(res.getString("name"));
             transportService.setCrn(res.getString("crn"));
@@ -482,8 +479,10 @@ public class DBQuery {
             transportService.setCreateDate(res.getDate("CREATEDate"));
             transportService.setIdle(res.getBoolean("idle"));
             transportService.setTransport(getResTransport(getSelectiveData("Transport","ownerID",res.getInt("id"))));
+        }
         return transportService;
     }
+    
     public static List<String> getElementColumns(String tableName) throws Exception{
         List<String> list = new ArrayList<>();
         
@@ -494,14 +493,13 @@ public class DBQuery {
 
         return list;
     }
-    public static Tourist getTourist(int id) throws Exception{
-        
-        
+    
+    public static Tourist getTourist(int id) throws Exception{ 
         String sqlString = "SELECT * FROM [Tourist] WHERE [id] = "+id+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
 
         Tourist t = new Tourist();
-        if(res.next())
+        if(res.next()){
             t.setId(res.getInt("id"));
             t.setPartner(getPartner(res.getInt("prtID")).getName());
             t.setInfo(res.getString("info"));
@@ -517,11 +515,9 @@ public class DBQuery {
             t.setLocalAddress(res.getString("localAdd"));
             t.setCreateDate(res.getDate("creatDate"));
             t.setIdle(res.getBoolean("idle"));
+        }
 
-            
         return t;
-        
-        
     }
     
     public static List<String> getSpecialtyData() throws Exception{
@@ -534,6 +530,7 @@ public class DBQuery {
 
         return list;
     }
+
     public static Map<Integer, String> getPartnerMap() throws Exception{
         Map<Integer, String> map = new TreeMap<>();
         
@@ -544,13 +541,11 @@ public class DBQuery {
 
         return map;
     }
-
   
-     public static List<Schedule> getScheduleData() throws Exception{
+    public static List<Schedule> getScheduleData() throws Exception{
         List<Schedule> scheduleList = new ArrayList<>();
 
         String querey = "DECLARE @date AS DATE = GETDATE(); SELECT startDate,id,title FROM Travel WHERE (YEAR(startDate) = YEAR(@date)) AND(MONTH(startDate) = MONTH(@date)) AND (DAY(@date)+4 >= DAY(startDate)) AND (DAY(startDate) >= DAY(@date)-2);";
-         
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(querey);
         
         while(res.next()){
@@ -566,93 +561,93 @@ public class DBQuery {
     }
      
      //////////////////////////-----------------------------
-     public static List<Integer> getTravelID() throws Exception{
+    public static List<Integer> getTravelID() throws Exception{
         List<Integer> trvIdlList = new ArrayList<>();
         
         String querey = "SELECT [id] FROM [Travel];"; //WHERE [name] = '"+ partner +"';";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(querey);
-        while(res.next()){
+        while(res.next())
             trvIdlList.add(res.getInt("id"));
-        }
+        
         return trvIdlList;
     }
-      public static List<TrvReport> getTrvReportData(List<Integer> trvIdlList) throws Exception{
-       
+    
+    public static List<TrvReport> getTrvReportData(List<Integer> trvIdlList) throws Exception{
         List<TrvReport> trvReportList = new ArrayList<>();
-        //for(int i=0;i<trvIdlList.size();i++){
+       
         for(Integer y: trvIdlList){
-        String querey = "DECLARE  @id AS INT = "+Integer.toString(y)+" "+
-"SELECT (@id) AS id" +
-",(SELECT title FROM Travel WHERE id = @id) AS title" +
-",(SELECT creatDate FROM Travel WHERE id = @id) AS creatDate" +
-",(SELECT idle FROM Travel WHERE id = @id) AS idle" +
-",(SELECT startDate FROM Travel WHERE id = @id) AS startDate" +
-",(SELECT endDate FROM Travel WHERE id = @id) AS endDate" +
-",(SELECT DATEDIFF(DAY, (SELECT startDate FROM Travel WHERE id = @id) ,(SELECT endDate FROM Travel WHERE id = @id))) AS dayNum" +
-",(SELECT price FROM Travel WHERE id = @id) AS price" +
-",(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id) AS turNum" +
-",(SELECT COUNT(trvID) FROM RegTransport WHERE trvID = @id) AS trsNum" +
-",(SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id) AS trsCost" +
-",(SELECT COUNT(trvID) FROM RegHostel WHERE trvID = @id) AS hstNum" +
-",(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) AS hstCost" +
-",(SELECT COUNT(trvID) FROM RegGuide WHERE trvID = @id) AS gudNum" +
-",(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) AS gudCost" +
-",(SELECT COUNT(trvID) FROM RegPlace WHERE trvID = @id) AS plcNum" +
-",(SELECT (SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
-"(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id)) AS plcCost" +
-",(SELECT COUNT(trvID) FROM Campaign WHERE trvID = @id) AS adNum" +
-",(SELECT SUM(cost) FROM Campaign WHERE trvID = @id) AS adCost" +
-",(SELECT SUM(actualProfit) FROM RegTourist WHERE trvID = @id) AS trvProfit" +
-",(SELECT (SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id) +" +
-"(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) +" +
-"((SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
-"(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id)) +" +
-"(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) +" +
-"(SELECT SUM(cost) FROM Campaign WHERE trvID = @id)) AS trvCost" +
-",(SELECT (SELECT SUM(actualProfit) FROM RegTourist WHERE trvID = @id)-" +
-"((SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id)+" +
-"(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) +" +
-"((SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
-"(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id))+" +
-"(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) +" +
-"(SELECT SUM(cost) FROM Campaign WHERE trvID = @id))) AS trvNetProfit;";
-        
-        ResultSet res = DBConnector.getConnection().createStatement().executeQuery(querey);
-        
-        while(res.next()){
-            TrvReport a = new TrvReport();
-            a.setId(res.getInt("id"));
-            a.setTitle(res.getString("title"));
-            a.setCreatDate(res.getDate("creatDate"));
-            a.setIdle(res.getBoolean("idle"));
-            a.setStartDate(res.getDate("startDate"));
-            a.setEndDate(res.getDate("endDate"));
-            a.setDayNum(res.getInt("dayNum"));
-            a.setPrice(res.getDouble("price"));
-            a.setTurNum(res.getInt("turNum"));
-            a.setTrsNum(res.getInt("trsNum"));
-            a.setTrsCost(res.getDouble("trsCost"));
-            a.setHstCost(res.getInt("hstNum"));
-            a.setHstCost(res.getDouble("hstCost"));
-            a.setGudNum(res.getInt("gudNum"));
-            a.setGudCost(res.getDouble("gudCost"));
-            a.setPlcNum(res.getInt("plcNum"));
-            a.setPlcCost(res.getDouble("plcCost"));
-            a.setAdNum(res.getInt("adNum"));
-            a.setAdCost(res.getDouble("adCost"));
-            a.setTrvProfit(res.getDouble("trvProfit"));
-            a.setTrvCost(res.getDouble("trvCost"));
-            a.setTrvNetProfit(res.getDouble("trvNetProfit"));
-          
+            String querey = "DECLARE  @id AS INT = "+Integer.toString(y)+" "+
+            "SELECT (@id) AS id" +
+            ",(SELECT title FROM Travel WHERE id = @id) AS title" +
+            ",(SELECT creatDate FROM Travel WHERE id = @id) AS creatDate" +
+            ",(SELECT idle FROM Travel WHERE id = @id) AS idle" +
+            ",(SELECT startDate FROM Travel WHERE id = @id) AS startDate" +
+            ",(SELECT endDate FROM Travel WHERE id = @id) AS endDate" +
+            ",(SELECT DATEDIFF(DAY, (SELECT startDate FROM Travel WHERE id = @id) ,(SELECT endDate FROM Travel WHERE id = @id))) AS dayNum" +
+            ",(SELECT price FROM Travel WHERE id = @id) AS price" +
+            ",(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id) AS turNum" +
+            ",(SELECT COUNT(trvID) FROM RegTransport WHERE trvID = @id) AS trsNum" +
+            ",(SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id) AS trsCost" +
+            ",(SELECT COUNT(trvID) FROM RegHostel WHERE trvID = @id) AS hstNum" +
+            ",(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) AS hstCost" +
+            ",(SELECT COUNT(trvID) FROM RegGuide WHERE trvID = @id) AS gudNum" +
+            ",(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) AS gudCost" +
+            ",(SELECT COUNT(trvID) FROM RegPlace WHERE trvID = @id) AS plcNum" +
+            ",(SELECT (SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
+            "(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id)) AS plcCost" +
+            ",(SELECT COUNT(trvID) FROM Campaign WHERE trvID = @id) AS adNum" +
+            ",(SELECT SUM(cost) FROM Campaign WHERE trvID = @id) AS adCost" +
+            ",(SELECT SUM(actualProfit) FROM RegTourist WHERE trvID = @id) AS trvProfit" +
+            ",(SELECT (SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id) +" +
+            "(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) +" +
+            "((SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
+            "(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id)) +" +
+            "(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) +" +
+            "(SELECT SUM(cost) FROM Campaign WHERE trvID = @id)) AS trvCost" +
+            ",(SELECT (SELECT SUM(actualProfit) FROM RegTourist WHERE trvID = @id)-" +
+            "((SELECT SUM(totalCost) FROM RegTransport WHERE trvID = @id)+" +
+            "(SELECT SUM(totalCost) FROM RegHostel WHERE trvID = @id) +" +
+            "((SELECT SUM(totalCost) FROM RegPlace WHERE trvID = @id)*" +
+            "(SELECT COUNT(trvID) FROM RegTourist WHERE trvID = @id))+" +
+            "(SELECT SUM(totalCost) FROM RegGuide WHERE trvID = @id) +" +
+            "(SELECT SUM(cost) FROM Campaign WHERE trvID = @id))) AS trvNetProfit;";
+                    
+            ResultSet res = DBConnector.getConnection().createStatement().executeQuery(querey);
+            
+            while(res.next()){
+                TrvReport a = new TrvReport();
+                a.setId(res.getInt("id"));
+                a.setTitle(res.getString("title"));
+                a.setCreatDate(res.getDate("creatDate"));
+                a.setIdle(res.getBoolean("idle"));
+                a.setStartDate(res.getDate("startDate"));
+                a.setEndDate(res.getDate("endDate"));
+                a.setDayNum(res.getInt("dayNum"));
+                a.setPrice(res.getDouble("price"));
+                a.setTurNum(res.getInt("turNum"));
+                a.setTrsNum(res.getInt("trsNum"));
+                a.setTrsCost(res.getDouble("trsCost"));
+                a.setHstCost(res.getInt("hstNum"));
+                a.setHstCost(res.getDouble("hstCost"));
+                a.setGudNum(res.getInt("gudNum"));
+                a.setGudCost(res.getDouble("gudCost"));
+                a.setPlcNum(res.getInt("plcNum"));
+                a.setPlcCost(res.getDouble("plcCost"));
+                a.setAdNum(res.getInt("adNum"));
+                a.setAdCost(res.getDouble("adCost"));
+                a.setTrvProfit(res.getDouble("trvProfit"));
+                a.setTrvCost(res.getDouble("trvCost"));
+                a.setTrvNetProfit(res.getDouble("trvNetProfit"));
+            
 
-            trvReportList.add(a);
-        }
+                trvReportList.add(a);
+            }
         }
 
         return trvReportList;
     }
-     /////////////////////////------------------------------
-     
+
+     /////////////////////////------------------------------ 
      
     public static ResultSet getData(String table) throws Exception{
         String querey = "SELECT * FROM "+table+";";       
@@ -660,7 +655,7 @@ public class DBQuery {
         return res;
     }
     
-     public static ResultSet getSearch(String table,String searchColumn, String searchWord) throws Exception{
+    public static ResultSet getSearch(String table,String searchColumn, String searchWord) throws Exception{
         String sqlString = "SELECT * FROM "+table+" WHERE "+searchColumn+" LIKE '%" + searchWord +"%';";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
         return res;
@@ -669,7 +664,6 @@ public class DBQuery {
     public static List<Agent> getResAgent(ResultSet res) throws SQLException, Exception{
         List<Agent> agentList = new ArrayList<>();
         while(res.next()){
-            
             Agent a = new Agent();
             a.setId(res.getInt("id"));
             a.setName(res.getString("name"));
@@ -688,9 +682,8 @@ public class DBQuery {
             
             agentList.add(a);
         }
-    return agentList;
-}
-   
+        return agentList;
+    }
 
     public static void addAgent(String name, String nid, boolean gender, String mobile,
         Date birthDate, String email, String city, String localAddress, String usrID,
@@ -719,54 +712,53 @@ public class DBQuery {
     public static void addRegTourist(RegTourist regTourist) throws Exception{
        
         String sqlString = 
-" DECLARE @turprft AS MONEY = (SELECT price FROM Travel WHERE id = "+regTourist.getTravel()+" )-" +
-" ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = "+regTourist.getTourist().getId()+")),0)* " +
-" (SELECT price FROM Travel WHERE id = "+regTourist.getTravel()+" ) " +
-" IF (SELECT balance FROM Tourist WHERE id = "+regTourist.getTourist().getId()+") >= @turprft " +
-" BEGIN" +
-" INSERT INTO RegTourist (trvID,turID,actualProfit) VALUES ("+regTourist.getTravel()+","+regTourist.getTourist().getId()+",@turprft)" +
-" UPDATE Tourist SET balance = (balance-@turprft) WHERE id = "+regTourist.getTourist().getId()+
-" END; ";
+        " DECLARE @turprft AS MONEY = (SELECT price FROM Travel WHERE id = "+regTourist.getTravel()+" )-" +
+        " ISNULL((SELECT discount FROM ServiceProvider WHERE id = (SELECT prtID FROM Tourist WHERE id = "+regTourist.getTourist().getId()+")),0)* " +
+        " (SELECT price FROM Travel WHERE id = "+regTourist.getTravel()+" ) " +
+        " IF (SELECT balance FROM Tourist WHERE id = "+regTourist.getTourist().getId()+") >= @turprft " +
+        " BEGIN" +
+        " INSERT INTO RegTourist (trvID,turID,actualProfit) VALUES ("+regTourist.getTravel()+","+regTourist.getTourist().getId()+",@turprft)" +
+        " UPDATE Tourist SET balance = (balance-@turprft) WHERE id = "+regTourist.getTourist().getId()+
+        " END; ";
          
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
-    
-    
-    public static void deleteRegTourist(RegTourist regTourist) throws Exception{
-
-        String sqlString = 
-"UPDATE Tourist SET balance = (balance+(SELECT actualProfit FROM RegTourist " +
-"WHERE trvID = "+regTourist.getTravel()+" AND turID = "+regTourist.getTourist().getId()+")) WHERE id = "+regTourist.getTourist().getId()+
-" DELETE RegTourist WHERE trvID = "+regTourist.getTravel()+" AND turID = "+regTourist.getTourist().getId() +";";
-      
-        DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
-    }
-    
-       public static void addRegPlace(RegPlace regPlace) throws Exception{
        
+    public static void deleteRegTourist(RegTourist regTourist) throws Exception{
         String sqlString = 
-" INSERT INTO RegPlace (trvID,plcID,totalCost) VALUES ("+regPlace.getTravel()+","+regPlace.getPlaceId()+","+regPlace.getPlace().getCost()+"); ";
-         
+        "UPDATE Tourist SET balance = (balance+(SELECT actualProfit FROM RegTourist " +
+        "WHERE trvID = "+regTourist.getTravel()+" AND turID = "+regTourist.getTourist().getId()+")) WHERE id = "+regTourist.getTourist().getId()+
+        " DELETE RegTourist WHERE trvID = "+regTourist.getTravel()+" AND turID = "+regTourist.getTourist().getId() +";";
+            
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
     
-    
+    public static void addRegPlace(RegPlace regPlace) throws Exception{
+        String sqlString = 
+        " INSERT INTO RegPlace (trvID,plcID,totalCost) VALUES ("+regPlace.getTravel()+","+
+        regPlace.getPlaceId()+","+regPlace.getPlace().getCost()+"); ";
+         
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
+    }
+     
     public static void deleteRegPlace(RegPlace regPlace) throws Exception{
-
-        String sqlString = " DELETE FROM RegPlace WHERE trvID = "+regPlace.getTravel()+" AND plcID = "+regPlace.getPlaceId()+" ;";
+        String sqlString = " DELETE FROM RegPlace WHERE trvID = "+regPlace.getTravel()+
+        " AND plcID = "+regPlace.getPlaceId()+" ;";
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
     
     public static void addRegTransport(RegTransport regTransport) throws Exception{
-       
-        String sqlString = "INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost) VALUES ("+regTransport.getTravel()+","+regTransport.getTransportId()+","+regTransport.getDaysNum()+","+regTransport.getDaysNum()+"*(SELECT cost FROM Transport WHERE id = "+regTransport.getTransport()+"));";
+        String sqlString = "INSERT INTO RegTransport (trvID,trsID,daysNum,totalCost) VALUES ("+
+        regTransport.getTravel()+","+regTransport.getTransportId()+","+regTransport.getDaysNum()+
+        ","+regTransport.getDaysNum()+"*(SELECT cost FROM Transport WHERE id = "+regTransport.getTransport()+"));";
+        
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
-    
-    
+     
     public static void deleteRegTransport(RegTransport regTransport) throws Exception{
-
-        String sqlString = " DELETE FROM RegTransport WHERE trvID = "+regTransport.getTravel()+" AND trsID = "+regTransport.getTransport()+" ;";
+        String sqlString = " DELETE FROM RegTransport WHERE trvID = "+regTransport.getTravel()+
+        " AND trsID = "+regTransport.getTransport()+" ;";
+        
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
     
@@ -774,8 +766,6 @@ public class DBQuery {
         String sqlString = "DELETE FROM [Agent] WHERE [id] = "+ agent.getId() +";";
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);        
     }
-    
-    
 
     public static void editAgent(Agent agent) throws Exception {
         int genderBit = 0;
@@ -784,10 +774,7 @@ public class DBQuery {
         int idleBit = 0;
         if (agent.isIdle()) idleBit = 1;
 
-
-
         String sqlString = "UPDATE [Agent] SET [Agent].[idle] = "+idleBit+","+
-
         "[Agent].[usrID] = '"+agent.getUsrID()+"',"+
         "[Agent].[password] = '"+agent.getPassword()+"',"+
         "[Agent].[name] = '"+agent.getName()+"',"+
@@ -799,9 +786,12 @@ public class DBQuery {
         "[Agent].[cityID] = "+getCityID(agent.getCity())+","+
         "[Agent].[localAdd] = '"+agent.getLocalAddress()+"'"+
         "WHERE [Agent].[id] = "+agent.getId()+";";
+
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
-///////////////////////////////////////////////////
+    
+    ///////////////////////////////////////////////////
+    
     public static Place getPlace(int id) throws Exception{
         String sqlString = "SELECT * FROM [Place] WHERE [id] = "+id+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
@@ -815,12 +805,12 @@ public class DBQuery {
             p.setCapacity(res.getInt("capacity"));
             p.setCost(res.getDouble("cost"));
             p.setCreateDate(res.getDate("creatDate"));
-            
         }
 
         return p;
     }
-        public static List<Place> getResPlace(ResultSet res) throws Exception{
+
+    public static List<Place> getResPlace(ResultSet res) throws Exception{
         List<Place> placeList = new ArrayList<>();
         while(res.next()){
             Place p = new Place();
@@ -846,19 +836,21 @@ public class DBQuery {
     public static void editPlace(Place place) throws Exception {
         int idleBit = 0;
         if (place.isIdle()) idleBit = 1;
-        
+
+        int cityID = getCityID(place.getCity());
+
         String sqlString = "UPDATE [Place] SET [Place].[idle] = "+idleBit+","+
         "[Place].[name] = '"+place.getName()+"',"+
         "[Place].[type] = '"+place.getType()+"',"+
         "[Place].[capacity] = "+place.getCapacity()+","+
         "[Place].[cost] = "+Double.toString(place.getCost())+","+
-        "[Place].[cityID] = "+place.getCity()+
+        "[Place].[cityID] = "+cityID+
         "WHERE [Place].[id] = "+place.getId()+";";
+
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
 
     public static void addPlace(Place place) throws Exception{
-
         int cityID = getCityID(place.getCity());
 
         int idleBit = 0;
@@ -876,12 +868,11 @@ public class DBQuery {
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
 
+    //////////////////////////////////////////////////
     
-//////////////////////////////////////////////////
     public static List<Tourist> getResTourist(ResultSet res) throws Exception{
         List<Tourist> list = new ArrayList<>();
 
-      
         while(res.next()){
             Tourist t = new Tourist();
             t.setId(res.getInt("id"));
@@ -906,7 +897,6 @@ public class DBQuery {
         return list;
     }
     
-
     public static void addTourist(Tourist tourist) throws Exception{
         int genderBit = 0;
         if (tourist.getGender().equals("أنثي")) genderBit = 1;
@@ -966,8 +956,8 @@ public class DBQuery {
         "[Tourist].[email] = '"+tourist.getEmail()+"',"+
         "[Tourist].[cityID] = "+getCityID(tourist.getCity())+","+
         "[Tourist].[localAdd] = '"+tourist.getLocalAddress()+"'"+
-
         " WHERE [Tourist].[id] = "+tourist.getId()+";";
+
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
 
@@ -1039,14 +1029,14 @@ public class DBQuery {
         "[Guide].[cityID] = "+getCityID(guide.getCity())+","+
         "[Guide].[localAdd] = '"+guide.getLocalAddress()+"'"+
         " WHERE [Guide].[id] = "+guide.getId()+";";
+        
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
-    
 
     public static List<Travel> getResTravel(ResultSet res) throws Exception{
         List<Travel> list = new ArrayList<>();
             
-            while (res.next()) {
+        while (res.next()) {
             Travel t = new Travel();
             t.setId(res.getInt("id"));
             t.setTitle(res.getString("title"));
@@ -1062,19 +1052,18 @@ public class DBQuery {
             t.setRegPLace(getResRegPlace(getRegistration("RegPlace",res.getInt("id"))));
             t.setRegTransport(getResRegTransport(getRegistration("RegTransport",res.getInt("id"))));
             
-            
             list.add(t);
         }
 
         return list;
     }
+    
     public static Travel getTravel(int trvID) throws Exception{
         Travel t = new Travel();
 
         String sqlString = "SELECT * FROM [Travel] WHERE [id] ="+trvID+";";
         ResultSet res = DBConnector.getConnection().createStatement().executeQuery(sqlString);
-        if(res.next()) 
-            
+        if(res.next()){
             t.setId(res.getInt("id"));
             t.setTitle(res.getString("title"));
             t.setCreatDate(res.getDate("creatDate"));
@@ -1088,7 +1077,7 @@ public class DBQuery {
             t.setRegHostel(getResRegHostel(getRegistration("RegHostel",res.getInt("id"))));
             t.setRegPLace(getResRegPlace(getRegistration("RegPlace",res.getInt("id"))));
             t.setRegTransport(getResRegTransport(getRegistration("RegTransport",res.getInt("id"))));
-            
+        }
  
         return t;
     }
@@ -1102,11 +1091,11 @@ public class DBQuery {
                 "DELETE FROM [RegGuide] WHERE [trvID] = "+ travel.getId() +";"+
                 "DELETE FROM [RegPlace] WHERE [trvID] = "+ travel.getId() +";"+
                 "DELETE FROM [Travel] WHERE [id] = "+ travel.getId() +";";
+        
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);  
     }
     
     public static void editTravel(Travel travel) throws Exception{
-        
         int idleBit = 0;
         if (travel.isIdle()) idleBit = 1;
 
@@ -1117,11 +1106,11 @@ public class DBQuery {
         "[Travel].[endDate] = '"+travel.getEndDate().toString()+"',"+
         "[Travel].[creatDate] = '"+travel.getCreatDate().toString()+"',"+
         " WHERE [Travel].[id] = "+travel.getId()+";";
+
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
     
-     public static void addTravel(Travel travel) throws Exception{
-
+    public static void addTravel(Travel travel) throws Exception{
         int idleBit = 0;
         if (travel.isIdle()) idleBit = 1;
 
@@ -1135,7 +1124,115 @@ public class DBQuery {
 
         DBConnector.getConnection().createStatement().executeUpdate(sqlString);
     }
-     
+ 
+    public static List<Phone> getResPhone(ResultSet res) throws Exception{
+        List<Phone> list = new ArrayList<>();
+
+        while (res.next()){
+            Phone p = new Phone();
+            p.setId(res.getInt("id"));
+            p.setFax(res.getBoolean("fax"));
+            p.setPhone(res.getString("phone"));
+            
+            list.add(p);
+        }
+
+        return list;
+    }
+
+    public static String getPhone(int id) throws Exception{
+        String str = "";
+        List<Phone> phones = getResPhone(getSelectiveData("Phone", "id", id));
+        
+        for (Phone phone : phones) {
+            str += phone.getPhone();
+            if(phone.isFax()) str += " : fax";
+            str += "\n";
+        }
+
+        return str;
+    }
+
+    public static void addServiceProvider(ServiceProvider svp) throws Exception{
+        int idleBit = 0;
+        if (svp.isIdle()) idleBit = 1;
+
+        String sqlString = "INSERT INTO [ServiceProvider]([class], [name], [CRN], [email], [cityID],"+
+        " [localAdd], [type], [idle]) VALUES ('"+
+        svp.getCls()+"','"+
+        svp.getName()+"','"+
+        svp.getCrn()+"','"+
+        svp.getEmail()+"',"+
+        getCityID(svp.getCity())+",'"+
+        svp.getLocalAddress()+"','"+
+        svp.getType()+"',"+
+        idleBit+");";
     
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString);
+    }
+    
+    public static void editServiceProvider(ServiceProvider svp) throws Exception{
+        int idleBit = 0;
+        if (svp.isIdle()) idleBit = 1;
+        
+        String sqlString = "UPDATE [ServiceProvider] SET [ServiceProvider].[class] = '"+svp.getCls()+"',"+
+        "[ServiceProvider].[name] = '"+svp.getName()+"',"+
+        "[ServiceProvider].[CRN] = '"+svp.getCrn()+"',"+
+        "[ServiceProvider].[email] = '"+svp.getEmail()+"',"+
+        "[ServiceProvider].[cityID] = "+getCityID(svp.getCity())+","+
+        "[ServiceProvider].[localAdd] = '"+svp.getLocalAddress()+"',"+
+        "[ServiceProvider].[type] = '"+svp.getType()+"',"+
+        "[ServiceProvider].[idle] = "+idleBit+" "+
+        "WHERE [ServiceProvider].[id] = "+svp.getId()+";";
+        
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString);
+    }
+
+    public static void deleteServiceProvider(ServiceProvider svp) throws Exception{
+        String sqlString = "DELETE FROM [ServiceProvider] WHERE [id] = "+svp.getId()+";";
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString); 
+    }
+
+    public static void addPartner(Partner prt) throws Exception{
+        int idleBit = 0;
+        if (prt.isIdle()) idleBit = 1;
+
+        String sqlString = "INSERT INTO [ServiceProvider]([class], [name], [CRN], [email], [cityID],"+
+        " [localAdd], [type], [idle], [discount]) VALUES ('"+
+        prt.getCls()+"','"+
+        prt.getName()+"','"+
+        prt.getCrn()+"','"+
+        prt.getEmail()+"',"+
+        getCityID(prt.getCity())+",'"+
+        prt.getLocalAddress()+"','"+
+        prt.getType()+"',"+
+        idleBit+","+
+        prt.getDiscount()+");";
+    
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString);
+    }
+    
+    public static void editPartner(Partner prt) throws Exception{
+        int idleBit = 0;
+        if (prt.isIdle()) idleBit = 1;
+        
+        String sqlString = "UPDATE [ServiceProvider] SET [ServiceProvider].[class] = '"+prt.getCls()+"',"+
+        "[ServiceProvider].[name] = '"+prt.getName()+"',"+
+        "[ServiceProvider].[CRN] = '"+prt.getCrn()+"',"+
+        "[ServiceProvider].[email] = '"+prt.getEmail()+"',"+
+        "[ServiceProvider].[cityID] = "+getCityID(prt.getCity())+","+
+        "[ServiceProvider].[localAdd] = '"+prt.getLocalAddress()+"',"+
+        "[ServiceProvider].[type] = '"+prt.getType()+"',"+
+        "[ServiceProvider].[idle] = "+idleBit+" "+
+        "[ServiceProvider].[discount] = "+prt.getDiscount()+" "+
+        "WHERE [ServiceProvider].[id] = "+prt.getId()+";";
+        
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString);
+    }
+
+    public static void deletePartner(Partner prt) throws Exception{
+        String sqlString = "DELETE FROM [ServiceProvider] WHERE [id] = "+prt.getId()+";";
+        DBConnector.getConnection().createStatement().executeUpdate(sqlString); 
+    }
 
 }

@@ -1,8 +1,4 @@
-import java.util.ArrayList;
 import java.util.List;
-
-
-
 
 public class Partner extends ServiceProvider {
     private double discount;
@@ -18,10 +14,6 @@ public class Partner extends ServiceProvider {
     public void setTourist(List<Tourist> tourist) {
         this.tourist = tourist;
     }
-
-  
-    
-    
     
     public double getDiscount() {
         return discount;

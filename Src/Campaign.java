@@ -113,5 +113,5 @@ public class Campaign {
             this.idle = "معطل";
     }
     
-    
+
 }

@@ -64,11 +64,6 @@ public class AgentWindowController implements Initializable {
     public void setAgent(Agent agent) {
         this.agent = agent;
 
-<<<<<<< HEAD
-        if(agent.getGender().equals("Female"))
-            this.genderComboBox.setValue("Female");
-                
-=======
         if(agent.getGender().equals("أنثي"))
             this.genderComboBox.setValue("أنثي");
         
@@ -79,7 +74,6 @@ public class AgentWindowController implements Initializable {
         //     e.printStackTrace();
         // }
         
->>>>>>> 6c293dbeda4c499650e60a29076f333119c87823
         this.nameField.setText(agent.getName());
         this.nidField.setText(agent.getNid());
         this.mobileField.setText(agent.getMobile());

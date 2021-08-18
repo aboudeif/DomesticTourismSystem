@@ -5,7 +5,6 @@
  */
 
 import java.net.URL;
-import java.sql.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -35,7 +34,6 @@ public class RegPlaceWindowController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
         initPlaceTableView();
     }    
 
@@ -75,7 +73,6 @@ public class RegPlaceWindowController implements Initializable {
         TableColumn<Place, Integer> capacityColumn = new TableColumn<>("السعة");
         capacityColumn.setCellValueFactory(new PropertyValueFactory<>("capacity"));
         placeTable.getColumns().add(capacityColumn);
-        
         
         
         refreshPlaceTableView();

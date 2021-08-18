@@ -15,11 +15,6 @@ public class Place {
     public Place() {
     }
 
-   
-  
-
-
-
     public int getId() {
         return id;
     }

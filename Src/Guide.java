@@ -1,4 +1,3 @@
-import java.sql.Date;
 
 public class Guide extends Person {
     private String specialty;
@@ -8,7 +7,6 @@ public class Guide extends Person {
         
     }
 
-   
     public double getRate() {
         return rate;
     }

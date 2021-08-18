@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -33,18 +32,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MainWindowController implements Initializable {
-
     private static MainWindowController instance;
-
     @FXML
     private TableView<Tourist> touristTable;
-
     @FXML
     private TableView<Guide> guideTable;
-
     @FXML
     private TableView<Agent> agentTable;
-    
     @FXML
     private TableView<Schedule> scheduleTable;
     @FXML
@@ -76,7 +70,6 @@ public class MainWindowController implements Initializable {
     private TableView<Partner> partnerTable;
     @FXML
     private Tab travelReportTab;
-    
     @FXML
     private AnchorPane travelReportPane;
     @FXML
@@ -188,18 +181,15 @@ public class MainWindowController implements Initializable {
     @FXML
     private TabPane registerationTabPane;
 
- @Override
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Store the Instance
         instance = this;
 
         // init database tables
         initRegTouristTableView();
-        
         initRegPlaceTableView();
-        
         initRegGuideTableView();
-        
         initRegTransportTableView();
         initAdServiceTableView();
         initRegHostelTableView();
@@ -220,13 +210,13 @@ public class MainWindowController implements Initializable {
         tabPane.getTabs().add(0,scheduleTab);
         
     }
+   
     @FXML
     void refreshAgent(ActionEvent event) {
         refreshAgentTableView();
     }
 
     public static MainWindowController getInstance() {
-        
         return instance;
     }
 
@@ -242,7 +232,7 @@ public class MainWindowController implements Initializable {
 
     @FXML
     void editAgent(ActionEvent event) {
-                Agent agent = agentTable.getSelectionModel().getSelectedItem();
+        Agent agent = agentTable.getSelectionModel().getSelectedItem();
         if (agent == null)
             return;
         
@@ -549,7 +539,7 @@ public class MainWindowController implements Initializable {
     }
     
     ///////////////===========================
-   void initRegTouristTableView(){
+    void initRegTouristTableView(){
         regTouristTable.getColumns().clear();
         
         TableColumn<RegTourist, Integer> touristColumn = new TableColumn<>("رقم السائح");
@@ -578,7 +568,7 @@ public class MainWindowController implements Initializable {
         regTouristTable.getColumns().add(travelColumn);
     }
    
-   void refreshRegTouristTableView(Travel travel){
+    void refreshRegTouristTableView(Travel travel){
         // clear all items
         regTouristTable.getItems().clear();
 
@@ -598,7 +588,7 @@ public class MainWindowController implements Initializable {
         
     }
    
-        void initRegPlaceTableView(){
+    void initRegPlaceTableView(){
         regPlaceTable.getColumns().clear();
         
         TableColumn<RegPlace, Integer> idColumn = new TableColumn<>("رقم المزار");
@@ -620,7 +610,8 @@ public class MainWindowController implements Initializable {
         refreshRegPlaceTableView(Travel.getSelectedTravel());
         
     }
-        void refreshRegPlaceTableView(Travel travel){
+
+    void refreshRegPlaceTableView(Travel travel){
         // clear all items
         regPlaceTable.getItems().clear();
 
@@ -629,9 +620,9 @@ public class MainWindowController implements Initializable {
             travel = DBQuery.getTravel(travel.getId());
             regPlaceList = travel.getRegPLace();
             List<Integer> trvIdlList = new ArrayList<>();
-        trvIdlList.add(travel.getId());
-        List<TrvReport> trvReportList = DBQuery.getTrvReportData(trvIdlList);
-        generateTravelReport(trvReportList, registrationPane);
+            trvIdlList.add(travel.getId());
+            List<TrvReport> trvReportList = DBQuery.getTrvReportData(trvIdlList);
+            generateTravelReport(trvReportList, registrationPane);
         }catch(Exception e){
         }
         if(regPlaceList != null)
@@ -639,7 +630,8 @@ public class MainWindowController implements Initializable {
                 regPlaceTable.getItems().add(reg);
         
     }
-        void initRegCampaignTableView(){
+
+    void initRegCampaignTableView(){
         regCampaignTable.getColumns().clear();
         
         TableColumn<Campaign, Integer> idColumn = new TableColumn<>("رقم الحملة الإعلانية");
@@ -689,7 +681,8 @@ public class MainWindowController implements Initializable {
         refreshCampaignTableView(Travel.getSelectedTravel());
         
     }
-        void refreshCampaignTableView(Travel travel){
+
+    void refreshCampaignTableView(Travel travel){
         // clear all items
         regCampaignTable.getItems().clear();
 
@@ -705,12 +698,12 @@ public class MainWindowController implements Initializable {
         
     }
 
-       void initRegHostelTableView(){
+    void initRegHostelTableView(){
         regHostelTable.getColumns().clear();
         
-        TableColumn<RegHostel, Integer> idColumn = new TableColumn<>("رقم محل الإقامة");
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
-        regHostelTable.getColumns().add(idColumn);
+        // TableColumn<RegHostel, Integer> idColumn = new TableColumn<>("رقم محل الإقامة");
+        // idColumn.setCellValueFactory(new PropertyValueFactory<>("place"));
+        // regHostelTable.getColumns().add(idColumn);
         
         TableColumn<RegHostel, Integer> travelColumn = new TableColumn<>("رقم الرحلة");
         travelColumn.setCellValueFactory(new PropertyValueFactory<>("travel"));
@@ -735,7 +728,8 @@ public class MainWindowController implements Initializable {
         refreshRegHostelTableView(Travel.getSelectedTravel());
         
     }
-        void refreshRegHostelTableView(Travel travel){
+
+    void refreshRegHostelTableView(Travel travel){
         // clear all items
         regHostelTable.getItems().clear();
 
@@ -750,7 +744,8 @@ public class MainWindowController implements Initializable {
                 regHostelTable.getItems().add(reg);
         
     }
-        void initRegGuideTableView(){
+
+    void initRegGuideTableView(){
         regGuideTable.getColumns().clear();
         
         TableColumn<RegGuide, Integer> idColumn = new TableColumn<>("رقم المرشد السياحي");
@@ -776,7 +771,8 @@ public class MainWindowController implements Initializable {
         
         refreshRegGuideTableView(Travel.getSelectedTravel());
     }
-        void refreshRegGuideTableView(Travel travel){
+
+    void refreshRegGuideTableView(Travel travel){
         // clear all items
         regGuideTable.getItems().clear();
 
@@ -792,7 +788,7 @@ public class MainWindowController implements Initializable {
         
     }
 
-        void initRegTransportTableView(){
+    void initRegTransportTableView(){
         regTransportTable.getColumns().clear();
         
         TableColumn<RegTransport, Integer> idColumn = new TableColumn<>("رقم وسيلة النقل");
@@ -839,7 +835,8 @@ public class MainWindowController implements Initializable {
         refreshRegTransportTableView(Travel.getSelectedTravel());
         
     }
-        void refreshRegTransportTableView(Travel travel){
+    
+    void refreshRegTransportTableView(Travel travel){
         // clear all items
         regTransportTable.getItems().clear();
 
@@ -855,9 +852,6 @@ public class MainWindowController implements Initializable {
         
     }
 
-        
-
-    
     // ------------- Internal Methods ------------- //
 
     void initAgentTableView(){
@@ -925,7 +919,7 @@ public class MainWindowController implements Initializable {
         
     }
     
-   void initTransportTableView(){
+    void initTransportTableView(){
         transportTable.getColumns().clear();
         
         TableColumn<Transport, Integer> idColumn = new TableColumn<>("الرقم");
@@ -985,8 +979,6 @@ public class MainWindowController implements Initializable {
         
     }
 
-    
-    
     void initTouristTableView(){
         touristTable.getColumns().clear();
         
@@ -1056,12 +1048,13 @@ public class MainWindowController implements Initializable {
         List<Tourist> list = null;
         try{
             list = DBQuery.getResTourist(DBQuery.getData("Tourist"));
+            if(list != null)
+                for (Tourist t : list)
+                    touristTable.getItems().add(t);
         }catch(Exception e){
         }
-        if(touristTable != null)
-            for (Tourist t : list)
-                touristTable.getItems().add(t);
     }
+
     void initAdServiceTableView(){
         adServiceTable.getColumns().clear();
         
@@ -1081,6 +1074,10 @@ public class MainWindowController implements Initializable {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         adServiceTable.getColumns().add(emailColumn);
         
+        TableColumn<AdService, String> phonesColumn = new TableColumn<>("هاتف");
+        phonesColumn.setCellValueFactory(new PropertyValueFactory<>("phones"));
+        adServiceTable.getColumns().add(phonesColumn);
+
         TableColumn<AdService, String> cityIDColumn = new TableColumn<>("المدينة");
         cityIDColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         adServiceTable.getColumns().add(cityIDColumn);
@@ -1113,7 +1110,8 @@ public class MainWindowController implements Initializable {
             list = DBQuery.getResAdService(DBQuery.getSelectiveData("ServiceProvider","class","ad"));
         }catch(Exception e){
         }
-        if(adServiceTable != null)
+        // if(adServiceTable != null)
+        if(list != null)
             for (AdService t : list)
                 adServiceTable.getItems().add(t);
     }
@@ -1136,6 +1134,10 @@ public class MainWindowController implements Initializable {
         TableColumn<HostelService, String> emailColumn = new TableColumn<>("الإيميل");
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         hostelServiceTable.getColumns().add(emailColumn);
+                
+        TableColumn<HostelService, String> phonesColumn = new TableColumn<>("هاتف");
+        phonesColumn.setCellValueFactory(new PropertyValueFactory<>("phones"));
+        hostelServiceTable.getColumns().add(phonesColumn);
         
         TableColumn<HostelService, String> cityIDColumn = new TableColumn<>("المدينة");
         cityIDColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
@@ -1169,7 +1171,8 @@ public class MainWindowController implements Initializable {
             list = DBQuery.getResHostelService(DBQuery.getSelectiveData("ServiceProvider","class","hst"));
         }catch(Exception e){
         }
-        if(hostelServiceTable != null)
+        // if(hostelServiceTable != null)
+        if(list != null)
             for (HostelService t : list)
                 hostelServiceTable.getItems().add(t);
     }
@@ -1193,6 +1196,10 @@ public class MainWindowController implements Initializable {
         emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
         transportServiceTable.getColumns().add(emailColumn);
         
+        TableColumn<TransportService, String> phonesColumn = new TableColumn<>("هاتف");
+        phonesColumn.setCellValueFactory(new PropertyValueFactory<>("phones"));
+        transportServiceTable.getColumns().add(phonesColumn);
+
         TableColumn<TransportService, String> cityIDColumn = new TableColumn<>("المدينة");
         cityIDColumn.setCellValueFactory(new PropertyValueFactory<>("city"));
         transportServiceTable.getColumns().add(cityIDColumn);
@@ -1225,12 +1232,13 @@ public class MainWindowController implements Initializable {
             list = DBQuery.getResTransportService(DBQuery.getSelectiveData("ServiceProvider","class","trs"));
         }catch(Exception e){
         }
-        if(transportServiceTable != null)
+        // if(transportServiceTable != null)
+        if(list != null)
             for (TransportService t : list)
                 transportServiceTable.getItems().add(t);
     }
 
-void initPartnerTableView(){
+    void initPartnerTableView(){
         partnerTable.getColumns().clear();
         
         TableColumn<Partner, Integer> idColumn = new TableColumn<>("الرقم");
@@ -1285,7 +1293,7 @@ void initPartnerTableView(){
             list = DBQuery.getResPartner(DBQuery.getSelectiveData("ServiceProvider","class","prt"));
         }catch(Exception e){
         }
-        if(partnerTable != null)
+        if(list != null)
             for (Partner t : list)
                 partnerTable.getItems().add(t);
     }
@@ -1357,7 +1365,7 @@ void initPartnerTableView(){
             list = DBQuery.getGuideData();
         }catch(Exception e){
         }
-        if(guideTable != null)
+        if(list != null)
             for (Guide g : list)
                 guideTable.getItems().add(g);
     }
@@ -1427,7 +1435,7 @@ void initPartnerTableView(){
             
         }catch(Exception e){
         }
-        if(hostelTable != null)
+        if(list != null)
             for (Hostel h : list)
                 hostelTable.getItems().add(h);
     }
@@ -1466,21 +1474,20 @@ void initPartnerTableView(){
 
     void refreshAdvertisementTableView(){
         // clear all items
-        
         adTable.getItems().clear();
 
         List<Advertisement> list = null;
         
         try{
             list = DBQuery.getResAdvertisement(DBQuery.getData("Advertisement"));
-            
         }catch(Exception e){
         }
-        if(adTable != null)
+        if(list != null)
             for (Advertisement a : list)
                 adTable.getItems().add(a);
     }
-   void initPlaceTableView(){
+
+    void initPlaceTableView(){
         placeTable.getColumns().clear();
         
         TableColumn<Place, Integer> idColumn = new TableColumn<>("الرقم");
@@ -1527,7 +1534,7 @@ void initPartnerTableView(){
             list = DBQuery.getResPlace(DBQuery.getData("Place"));
         }catch(Exception e){
         }
-        if(placeTable != null)
+        if(list != null)
             for (Place p : list)
                 placeTable.getItems().add(p);
     }
@@ -1567,14 +1574,13 @@ void initPartnerTableView(){
         refreshTravelTableView();
     }
     
-    
     void refreshTravelTableView(){
         travelTable.getItems().clear();
 
         List<Travel> list = null;
         try {
             list = DBQuery.getResTravel(DBQuery.getData("Travel"));
-            if(travelTable != null)
+            if(list != null)
                 for(Travel t : list)
                     travelTable.getItems().add(t);
         } catch (Exception e) {
@@ -1606,7 +1612,7 @@ void initPartnerTableView(){
         List<Schedule> list = null;
         try {
             list = DBQuery.getScheduleData();
-            if(scheduleTable != null)
+            if(list != null)
                 for(Schedule s : list)
                     scheduleTable.getItems().add(s);
         } catch (Exception e) {
@@ -1669,6 +1675,7 @@ void initPartnerTableView(){
             e.printStackTrace();
         }
     }
+    
     private String toArEn(String columnName){
       
        HashMap<String,String> Ar = new HashMap<String,String>();
@@ -1715,7 +1722,6 @@ void initPartnerTableView(){
            return columnName;
     }
 
-
     @FXML
     private void showHostelMenu(ActionEvent event) {
         initHostelTableView();
@@ -1733,7 +1739,6 @@ void initPartnerTableView(){
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void showPartnerMenu(ActionEvent event) {
@@ -1802,7 +1807,6 @@ void initPartnerTableView(){
         selectionModel.select(scheduleTab);
     }
 
-
     @FXML
     private void showTravelReport(ActionEvent event) throws Exception {
         initTravelReport();
@@ -1812,11 +1816,11 @@ void initPartnerTableView(){
         
     }
     
-
     private void initTravelReport() throws Exception {
         List<TrvReport> trvReportList = DBQuery.getTrvReportData(DBQuery.getTravelID());
         generateTravelReport(trvReportList, travelReportPane);
     }
+    
     private void generateTravelReport(List<TrvReport> trvReportList,AnchorPane pane){    
         pane.getChildren().clear();
         VBox[] v;
@@ -1876,7 +1880,6 @@ void initPartnerTableView(){
        
     } 
       
-    
     private Label makeLabel(String s){
         Label l = new Label(s);
         l.setTextFill(Color.web("#0076a3"));
@@ -1887,24 +1890,23 @@ void initPartnerTableView(){
         return l;
     }
 
-    
     @FXML
     private void searchAgent(KeyEvent event) {
         if (agentSearchText.getText()== null){
             refreshAgentTableView();
         } else {
       
-         agentTable.getItems().clear();
+            agentTable.getItems().clear();
 
-        List<Agent> angetList = null;
-        try{
-            angetList = DBQuery.getResAgent(DBQuery.getSearch("Agent",toArEn(agentSearchComboBox.getValue()), agentSearchText.getText()));
-        }catch(Exception e){
-        }
-        if(angetList != null)
-            for (Agent agent : angetList)
-                agentTable.getItems().add(agent);
-        }
+            List<Agent> angetList = null;
+            try{
+                angetList = DBQuery.getResAgent(DBQuery.getSearch("Agent",toArEn(agentSearchComboBox.getValue()), agentSearchText.getText()));
+            }catch(Exception e){
+            }
+            if(angetList != null)
+                for (Agent agent : angetList)
+                    agentTable.getItems().add(agent);
+            }
     }
 
     @FXML
@@ -2051,50 +2053,176 @@ void initPartnerTableView(){
 
     @FXML
     private void refreshTransportService(ActionEvent event) {
+        refreshTransportServiceTableView();
     }
 
     @FXML
     private void addTransportService(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TransportServiceWindow.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void editTransportService(ActionEvent event) {
+        TransportService trans = transportServiceTable.getSelectionModel().getSelectedItem();
+        if (trans == null)
+            return;
+        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TransportServiceWindow.fxml"));
+            Parent root = loader.load();
+            TransportServiceWindowController controller = loader.getController();
+            controller.setEditOp(true);
+            controller.setTrans(trans);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void deleteTransportService(ActionEvent event) {
+        TransportService trans = transportServiceTable.getSelectionModel().getSelectedItem();
+        try {
+            DBQuery.deleteServiceProvider(trans);
+        } catch (Exception e) {
+        }
+        refreshTransportServiceTableView();
     }
 
     @FXML
     private void refreshHostelService(ActionEvent event) {
+        refreshHostelServiceTableView();
     }
 
     @FXML
     private void addHostelService(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HostelServiceWindow.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void editHostelService(ActionEvent event) {
+        HostelService host = hostelServiceTable.getSelectionModel().getSelectedItem();
+        if (host == null)
+            return;
+        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HostelServiceWindow.fxml"));
+            Parent root = loader.load();
+            HostelServiceWindowController controller = loader.getController();
+            controller.setEditOp(true);
+            controller.setHost(host);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void deleteHostelService(ActionEvent event) {
+        HostelService host = hostelServiceTable.getSelectionModel().getSelectedItem();
+        try {
+            DBQuery.deleteServiceProvider(host);
+        } catch (Exception e) {
+        }
+        refreshHostelServiceTableView();
     }
 
     @FXML
     private void refreshAdService(ActionEvent event) {
+        refreshAdServiceTableView();
     }
 
     @FXML
     private void addAdService(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdServiceWindow.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void editAdService(ActionEvent event) {
+        AdService ad = adServiceTable.getSelectionModel().getSelectedItem();
+        if (ad == null)
+            return;
+        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdServiceWindow.fxml"));
+            Parent root = loader.load();
+            AdServiceWindowController controller = loader.getController();
+            controller.setEditOp(true);
+            controller.setAd(ad);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void deleteAdService(ActionEvent event) {
+        AdService ad = adServiceTable.getSelectionModel().getSelectedItem();
+        try {
+            DBQuery.deleteServiceProvider(ad);
+        } catch (Exception e) {
+        }
+        refreshAdServiceTableView();
     }
 
     @FXML
@@ -2121,14 +2249,10 @@ void initPartnerTableView(){
 
     @FXML
     private void addRegTourist(ActionEvent event) {
-      
-              
-        
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegTouristWindow.fxml"));
             Parent root = loader.load();
-            RegTouristWindowController controller = loader.getController();
-            
+            // RegTouristWindowController controller = loader.getController();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -2159,12 +2283,10 @@ void initPartnerTableView(){
 
     @FXML
     private void addRegPlace(ActionEvent event) {
-         
         try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegPlaceWindow.fxml"));
             Parent root = loader.load();
-            RegPlaceWindowController controller = loader.getController();
-            
+            // RegPlaceWindowController controller = loader.getController();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -2212,8 +2334,7 @@ void initPartnerTableView(){
          try{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("RegTransportWindow.fxml"));
             Parent root = loader.load();
-            RegTransportWindowController controller = loader.getController();
-            
+            // RegTransportWindowController controller = loader.getController();
 
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -2250,8 +2371,6 @@ void initPartnerTableView(){
     private void deleteRegHostel(ActionEvent event) {
     }
 
-
-
     @FXML
     private void refreshPartner(ActionEvent event) {
         refreshPartnerTableView();
@@ -2259,14 +2378,55 @@ void initPartnerTableView(){
 
     @FXML
     private void addPartner(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PartnerServiceWindow.fxml"));
+            Scene scene = new Scene(loader.load());
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void editPartner(ActionEvent event) {
+        Partner prt = partnerTable.getSelectionModel().getSelectedItem();
+        if (prt == null)
+            return;
+        
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("PartnerServiceWindow.fxml"));
+            Parent root = loader.load();
+            PartnerServiceWindowController controller = loader.getController();
+            controller.setEditOp(true);
+            controller.setPartner(prt);
+
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setResizable(false);
+            stage.setTitle("Domestic Tourism System");
+            stage.getIcons().add(new Image("/icon.png"));
+            stage.setScene(scene);
+            stage.showAndWait();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     @FXML
     private void deletePartner(ActionEvent event) {
+        Partner prt = partnerTable.getSelectionModel().getSelectedItem();
+        try {
+            DBQuery.deleteServiceProvider(prt);
+        } catch (Exception e) {
+        }
+        refreshPartnerTableView();
     }
 
     @FXML
@@ -2353,8 +2513,5 @@ void initPartnerTableView(){
                 agentTable.getItems().add(agent);
         }*/
     }
-   
-
-   
 
 }

@@ -1,7 +1,6 @@
 
 import java.sql.Date;
 
-
 public class Hostel {
     private int id;
     private String name;

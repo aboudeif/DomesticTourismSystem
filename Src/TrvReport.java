@@ -29,31 +29,6 @@ public class TrvReport {
     public TrvReport() {
     }
 
-   /* public TrvReport(int id, String title, Date creatDate, String idle, Date startDate, Date endDate, int dayNum, double price, int turNum, int trsNum, double trsCost, int hstNum, double hstCost, int gudNum, double gudCost, int plcNum, double plcCost, int adNum, double adCost, double trvProfit, double trvCost, double trvNetProfit) {
-        this.setId(id);
-        this.setTitle(title);
-        this.setCreatDate(creatDate);
-        this.setIdle(idle);
-        this.setStartDate(startDate);
-        this.setEndDate(endDate);
-        this.setDayNum(dayNum);
-        this.setPrice(price);
-        this.setTurNum(turNum);
-        this.setTrsNum(trsNum);
-        this.setTrsCost(trsCost);
-        this.setHstNum(hstNum);
-        this.setHstCost(hstCost);
-        this.setGudNum(gudNum);
-        this.setGudCost(gudCost);
-        this.setPlcNum(plcNum);
-        this.setPlcCost(plcCost);
-        this.setAdNum(adNum);
-        this.setAdCost(adCost);
-        this.trvProfit = trvProfit;
-        this.trvCost = trvCost;
-        this.trvNetProfit = trvNetProfit;
-    }*/
-
     public int getId() {
         return id;
     }
@@ -236,7 +211,5 @@ public class TrvReport {
     public void setTrvNetProfit(double trvNetProfit) {
         this.trvNetProfit = trvNetProfit;
     }
-    
-    
     
 }

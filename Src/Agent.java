@@ -1,5 +1,3 @@
-import java.sql.Date;
-
 
 public class Agent extends Person {
     private String usrID;
@@ -7,8 +5,6 @@ public class Agent extends Person {
 
     public Agent(){
     }
-
-   
     
     public String getUsrID() {
         return usrID;
