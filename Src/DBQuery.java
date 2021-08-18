@@ -80,11 +80,12 @@ public class DBQuery {
         return res;
     }
     
-    public static List<Partner>  getResPartner(ResultSet res) throws Exception{
+    public static List<Partner> getResPartner(ResultSet res) throws Exception{
         List<Partner> list = new ArrayList<>();
         
         while(res.next()){
             Partner partner = new Partner();
+            partner.setCls(res.getString("class"));
             partner.setId(res.getInt("id"));
             partner.setName(res.getString("name"));
             partner.setCrn(res.getString("crn"));
@@ -445,6 +446,7 @@ public class DBQuery {
         
         while(res.next()){
             TransportService transportService = new TransportService();
+            transportService.setCls(res.getString("class"));
             transportService.setId(res.getInt("id"));
             transportService.setName(res.getString("name"));
             transportService.setCrn(res.getString("crn"));

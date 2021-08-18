@@ -1743,12 +1743,12 @@ public class MainWindowController implements Initializable {
     @FXML
     private void showPartnerMenu(ActionEvent event) {
         initPartnerTableView();
-         tabPane.getTabs().add(0, partnerTab);
+        tabPane.getTabs().add(0, partnerTab);
         SingleSelectionModel<Tab> selectionModel = tabPane.getSelectionModel();
         selectionModel.select(partnerTab);
         try {
             //agentSearchComboBox.getItems().add("");
-            List<String> columnsList = DBQuery.getElementColumns("partner");
+            List<String> columnsList = DBQuery.getElementColumns("ServiceProvider");
             for (String c : columnsList)
                 partnerSearchComboBox.getItems().add(toArEn(c));
             partnerSearchComboBox.getSelectionModel().select(3);
@@ -1896,17 +1896,17 @@ public class MainWindowController implements Initializable {
             refreshAgentTableView();
         } else {
       
-            agentTable.getItems().clear();
+        agentTable.getItems().clear();
 
-            List<Agent> angetList = null;
-            try{
-                angetList = DBQuery.getResAgent(DBQuery.getSearch("Agent",toArEn(agentSearchComboBox.getValue()), agentSearchText.getText()));
-            }catch(Exception e){
-            }
-            if(angetList != null)
-                for (Agent agent : angetList)
-                    agentTable.getItems().add(agent);
-            }
+        List<Agent> angetList = null;
+        try{
+            angetList = DBQuery.getResAgent(DBQuery.getSearch("Agent",toArEn(agentSearchComboBox.getValue()), agentSearchText.getText()));
+        }catch(Exception e){
+        }
+        if(angetList != null)
+            for (Agent agent : angetList)
+                agentTable.getItems().add(agent);
+        }
     }
 
     @FXML
@@ -2464,18 +2464,93 @@ public class MainWindowController implements Initializable {
 
     @FXML
     private void searchPartner(KeyEvent event) {
+        if (partnerSearchText.getText() == null){
+            refreshPartnerTableView();
+        } else {
+      
+            partnerTable.getItems().clear();
+
+            List<Partner> list = null;
+            try{
+                list = DBQuery.getResPartner(DBQuery.getSearch("ServiceProvider",
+                        toArEn(partnerSearchComboBox.getValue()), partnerSearchText.getText()));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            if(list != null)
+                for (Partner prt : list)
+                    if("prt".equals(prt.getCls()))
+                        partnerTable.getItems().add(prt);
+        }
     }
 
     @FXML
     private void searchTransportService(KeyEvent event) {
+        if (transportSearchText.getText() == null){
+            refreshTransportServiceTableView();
+        } else {
+      
+            transportServiceTable.getItems().clear();
+
+            List<TransportService> list = null;
+            try{
+                list = DBQuery.getResTransportService(DBQuery.getSearch("ServiceProvider",
+                        toArEn(transportServiceSearchComboBox.getValue()),
+                        transportServiceSearchText.getText()));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            if(list != null)
+                for (TransportService trs : list)
+                    if("trs".equals(trs.getCls()))
+                        transportServiceTable.getItems().add(trs);
+        }
     }
 
     @FXML
     private void searchHostelService(KeyEvent event) {
+        if (hostelServiceSearchText.getText() == null){
+            refreshHostelServiceTableView();
+        } else {
+      
+            hostelServiceTable.getItems().clear();
+
+            List<HostelService> list = null;
+            try{
+                list = DBQuery.getResHostelService(DBQuery.getSearch("ServiceProvider",
+                        toArEn(hostelServiceSearchComboBox.getValue()),
+                        hostelServiceSearchText.getText()));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            if(list != null)
+                for (HostelService hst : list)
+                    if("hst".equals(hst.getCls()))
+                        hostelServiceTable.getItems().add(hst);
+        }
     }
 
     @FXML
     private void searchAdService(KeyEvent event) {
+        if (adServiceSearchText.getText() == null){
+            refreshAdServiceTableView();
+        } else {
+      
+            adServiceTable.getItems().clear();
+
+            List<AdService> list = null;
+            try{
+                list = DBQuery.getResAdService(DBQuery.getSearch("ServiceProvider",
+                        toArEn(adServiceSearchComboBox.getValue()),
+                        adServiceSearchText.getText()));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            if(list != null)
+                for (AdService ad : list)
+                    if("ad".equals(ad.getCls()))
+                        adServiceTable.getItems().add(ad);
+        }
     }
 
     @FXML
