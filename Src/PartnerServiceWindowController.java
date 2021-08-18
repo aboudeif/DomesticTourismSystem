@@ -1,4 +1,6 @@
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.ParsePosition;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -14,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.stage.Stage;
-import javafx.util.converter.DoubleStringConverter;
 
 public class PartnerServiceWindowController implements Initializable {
     private boolean isEditOp;
@@ -183,8 +184,25 @@ public class PartnerServiceWindowController implements Initializable {
             }
         });
         
-        TextFormatter<Double> formatter = new TextFormatter<>(new DoubleStringConverter(), 0d);
-        this.discountField.setTextFormatter(formatter);
+        
+        DecimalFormat format = new DecimalFormat("#");
+        final TextFormatter<Object> decimalTextFormatter = new TextFormatter<>(change -> {
+            if (change.getControlNewText().isEmpty()) {
+                return change;
+            }
+            ParsePosition parsePosition = new ParsePosition(0);
+            Object object = format.parse(change.getControlNewText(), parsePosition);
+
+            if (object == null || parsePosition.getIndex() < change.getControlNewText().length()) {
+                return null;
+            } else {
+                return change;
+            }
+        });
+        this.discountField.setTextFormatter(decimalTextFormatter);
+        // TextFormatter<Double> formatter = new TextFormatter<>(new DoubleStringConverter(), 0d);
+        // this.discountField.setTextFormatter(formatter);
+
 
         try{
             List<String> cityList = DBQuery.getCityData();
